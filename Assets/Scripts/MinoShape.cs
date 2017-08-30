@@ -4,7 +4,7 @@
 	public MinoShape(){
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				cell[i,j] = 0;
+				cell[j, i] = 0;
 			}
 		}
 	}
@@ -12,7 +12,7 @@
 	public void SetCell(int[,] inputcells){
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				this.cell [i, j] = inputcells [i, j];
+				this.cell [j, i] = inputcells [j, i];
 			}
 		}
 	}

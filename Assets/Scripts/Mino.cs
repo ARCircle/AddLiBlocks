@@ -89,6 +89,7 @@ public class Mino : MonoBehaviour {
 		World.Plr[pnum].mino_controling = true;
 		now_x = 4; now_y = 23;
 		next_x = 4; next_y = 23;
+		rot = 0; timer = 0f;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
 			box [i] = Instantiate<GameObject> (boxbase);
 			box [i].transform.localPosition = new Vector3 (now_x, now_y, 0f);
@@ -101,20 +102,38 @@ public class Mino : MonoBehaviour {
 	}
 
 	public void UpRow(){    //一段上昇時、操作中のミノも一段上昇させる
-		now_y += 1;
-		next_y += 1;
+		if(now_y < 23)
+			now_y += 1;
+		if(next_y < 23)
+			next_y += 1;
+	}
+
+	public GameObject MakeBlock(){
+		GameObject tmp = Instantiate<GameObject> (boxbase);
+		tmp.transform.localPosition = new Vector3 (now_x, now_y, 0f);
+		tmp.transform.SetParent (useobj.transform);
+		tmp.GetComponent<MeshRenderer> ().enabled = true;
+		return tmp;
+	}
+
+	bool InRangeCheck(int a, int b) {
+		if (a < 0 || b < 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
 		int tmpx = now_x - 2, tmpy = now_y - 2;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (nextcell [i, j] > 0) {
+				if (nextcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
 					if (isFinal) {
-						World.Plr [pnum].InputStack(i + tmpx, j + tmpy, 
-							nextcell [i, j], box [nextcell [i, j] - 1]);
+						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, 
+							nextcell [j, i], box [nextcell [j, i] - 1]);
 					}
-					box [nextcell [i, j] - 1].transform.localPosition = new Vector3 (i + tmpx, j + tmpy, 0);
+					box [nextcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
 				}
 			}
 		}
@@ -126,8 +145,8 @@ public class Mino : MonoBehaviour {
 		int tmpx = next_x - 2, tmpy = next_y - 2;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (nextcell [i, j] > 0) {
-					if (World.Plr [pnum].stage [i + tmpx, j + tmpy] > 0) {
+				if (nextcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
+					if (World.Plr [pnum].stage [j + tmpx, i + tmpy] > 0) {
 						now2next ();
 						return false;
 					}
@@ -143,7 +162,7 @@ public class Mino : MonoBehaviour {
 		next_y = now_y;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				nextcell [i, j] = nowcell [i, j];
+				nextcell [j, i] = nowcell [j, i];
 			}
 		}
 	}
@@ -153,7 +172,7 @@ public class Mino : MonoBehaviour {
 		now_y = next_y;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				nowcell [i, j] = nextcell [i, j];
+				nowcell [j, i] = nextcell [j, i];
 			}
 		}
 	}
@@ -163,8 +182,8 @@ public class Mino : MonoBehaviour {
 		Vector2 mps;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				mps = Chgxy (i, j, rot);
-				nextcell [(int)mps.x, (int)mps.y] = basecell [i, j];
+				mps = Chgxy (j, i, rot);
+				nextcell [(int)mps.y, (int)mps.x] = basecell [j, i];
 			}
 		}
 	}
@@ -172,11 +191,11 @@ public class Mino : MonoBehaviour {
 	Vector2 Chgxy (int xx, int yy, int funcrot) {    // 回転後のx,yの関係
 		int tmpx = xx - 2, tmpy = yy - 2;
 		switch(funcrot){
-		case 1:
+		case 3:
 			return new Vector2(tmpy + 2, -tmpx + 2);
 		case 2:
 			return new Vector2(-tmpx + 2, -tmpy + 2);
-		case 3:
+		case 1:
 			return new Vector2(-tmpy + 2, tmpx + 2);
 		default:
 			return new Vector2(tmpx + 2, tmpy + 2);
