@@ -8,13 +8,12 @@
 			}
 		}
 	}
+
+	public void SetCell(int[,] inputcells){
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				this.cell [i, j] = inputcells [i, j];
+			}
+		}
+	}
 }
-
-
-// (1,2) (2,-1) (-1,-2) (-2,1)
-
-/*
-ミノの形を保存する
-保存したデータからインスタンス
-
-*/

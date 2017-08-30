@@ -12,11 +12,7 @@ public static class World {
 	}
 
 	public static void SettingMino(int playernum, int minonum, int[,] cells){  //ミノの配置代入
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				Plr [playernum - 1].mino [minonum].cell [i, j] = cells [i, j];
-			}
-		}
+		Plr [playernum - 1].mino [minonum].SetCell(cells);
 	}
 
 	public static void MinoReset(){
