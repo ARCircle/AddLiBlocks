@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mino : MonoBehaviour {
-	public int pnum = 1;
+	public int pnum = 0;
+	string pstring;
+	bool doStartDelay = false;
 
 	int now_x = 4, now_y = 23;
 	int next_x = 4, next_y = 23;
@@ -11,40 +13,113 @@ public class Mino : MonoBehaviour {
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
 	int rot = 0; //0, 1, 2, 3
-	float timer = 0f, clock = 1f;
+	float timer = 0f, clock = 0.5f, accel = 10f;
+
+	GameObject boxbase;
+	GameObject useobj;
 	GameObject[] box = new GameObject[5];
 
-	void Start () {    // 初期設定
+	void StartDelay () {    // 初期設定
+		if (pnum == 0) {
+			pstring = "1P_";
+		} else {
+			pstring = "2P_";
+		}
+		boxbase = transform.Find("Block").gameObject;
+		useobj = transform.Find("UseBlocks").gameObject;
+		World.Plr [pnum].stackobj = transform.Find("BlockStack");
+		World.Plr [pnum].myself = this;
+		doStartDelay = true;
 	}
 
 	void Update () {
-		if (timer > clock) {  // ミノの自動落下
-			next_y -= 1;
-			PutBoxes (!CheckEnable ());
-			timer = 0f;
-		}
-		// ミノの右移動
-		// ミノの左移動
-		// ミノの右回転
-		// ミノの左回転
-		// ミノの高速落下
-		// ミノの即着地
+		if (doStartDelay) {	
+			
+			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
+			float angle = Input.GetAxis (pstring + "RightRotate");
+			if (anglepush) {
+				if (angle > 0.1f)    // ミノの右回転
+					Rotating (1);
+				else if (angle < -0.1f)    // ミノの左回転
+					Rotating (3);
+				if (CheckEnable ())    // 実際にブロック移動
+					PutBoxes (false);
+			}
 
-		timer -= Time.deltaTime;
+			bool movepush = Input.GetButtonDown (pstring + "RightMove");
+			float move = Input.GetAxis (pstring + "RightMove");
+			if (movepush) {
+				if (move > 0.1f)   // ミノの右移動
+					next_x += 1;
+				else if (move < -0.1f)   // ミノの左移動
+					next_x -= 1;
+				if (CheckEnable ())    // 実際にブロック移動
+					PutBoxes (false);
+			}
+
+			bool updownpush = Input.GetButtonDown (pstring + "Down");
+			float updown = Input.GetAxis (pstring + "Down");
+			if (updown > 0.1f) {    // ミノの高速落下
+				if (timer < clock * (1f - 1f / accel)) {
+					timer += clock * (1f - 1f / accel);				
+				}
+			}
+			if (timer > clock) {  // ミノの自動落下
+				next_y -= 1;
+				PutBoxes (!CheckEnable ());
+				timer = 0f;
+			}
+
+			if (updownpush) {
+				if (updown < -0.1f) {    // ミノの即着地
+					while (World.Plr [pnum].mino_controling) {
+						next_y -= 1;
+						PutBoxes (!CheckEnable ());
+					}
+				}
+			}
+			timer += Time.deltaTime;
+
+		} else {
+			StartDelay ();
+		}
 	}
 
 	public void Set(int minonum, int rotnum){    // ミノの取得
+		World.Plr[pnum].mino_controling = true;
+		now_x = 4; now_y = 23;
+		next_x = 4; next_y = 23;
+		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
+			box [i] = Instantiate<GameObject> (boxbase);
+			box [i].transform.localPosition = new Vector3 (now_x, now_y, 0f);
+			box [i].transform.SetParent (useobj.transform);
+			box [i].GetComponent<MeshRenderer> ().enabled = true;
+		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
+		next2now ();
+	}
+
+	public void UpRow(){    //一段上昇時、操作中のミノも一段上昇させる
+		now_y += 1;
+		next_y += 1;
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
 		int tmpx = now_x - 2, tmpy = now_y - 2;
-		next2now ();
-
-		if (isFinal) {
-		} else {
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (nextcell [i, j] > 0) {
+					if (isFinal) {
+						World.Plr [pnum].InputStack(i + tmpx, j + tmpy, 
+							nextcell [i, j], box [nextcell [i, j] - 1]);
+					}
+					box [nextcell [i, j] - 1].transform.localPosition = new Vector3 (i + tmpx, j + tmpy, 0);
+				}
+			}
 		}
+		if (isFinal)
+			World.Plr[pnum].mino_controling = false;
 	}
 
 	bool CheckEnable(){    // 動けるか判定
