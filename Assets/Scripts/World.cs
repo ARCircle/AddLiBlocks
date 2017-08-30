@@ -4,11 +4,19 @@ using UnityEngine;
 
 public static class World {
 	
-	public static P[] Plr = new P[2];
+	public static PlayerInfo[] Plr = new PlayerInfo[2];
 
 	public static void setP(){
-		Plr [0] = new P ();
-		Plr [1] = new P ();
+		Plr [0] = new PlayerInfo ();
+		Plr [1] = new PlayerInfo ();
+	}
+
+	public static void SettingMino(int playernum, int minonum, int[,] cells){  //ミノの配置代入
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				Plr [playernum - 1].mino [minonum].cell [i, j] = cells [i, j];
+			}
+		}
 	}
 
 	public static void MinoReset(){
@@ -19,10 +27,10 @@ public static class World {
 		
 	}
 
-	public class P{
-		public int[,] stage = new int[12, 26];  //0~11,0~25 値が0=空白, 9=壁, 1=通常ブロック, 2=追加ブロック
+	public class PlayerInfo{
+		public int[,] stage = new int[12, 26];  // 値が0=空白, 9=壁, 1~4=通常ブロック, 5=追加ブロック
 		public MinoShape[] mino = new MinoShape[5];
-		public P(){
+		public PlayerInfo(){
 			for (int i = 0; i < 12; i++) {
 				for (int j = 0; j < 26; j++) {
 					if (i==0 || i==11 || j==0){
