@@ -557,13 +557,13 @@ public class SettingScript : MonoBehaviour {
 				script.setting = false;
 
 				if (playernum == 1) {
-					SettingSceneManager.P1 = true;
-					P1.interactable = false;
-					ColorManager.BtnStateColorChange (P1, Color.gray, 3);
-				} else if (playernum == 2) {
 					SettingSceneManager.P2 = true;
 					P2.interactable = false;
 					ColorManager.BtnStateColorChange (P2, Color.gray, 3);
+				} else if (playernum == 2) {
+					SettingSceneManager.P1 = true;
+					P1.interactable = false;
+					ColorManager.BtnStateColorChange (P1, Color.gray, 3);
 				}
 				st.Wait ();
 			}

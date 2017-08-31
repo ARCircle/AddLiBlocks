@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	GameObject[,] nextplace = new GameObject[2, 3];
 	GameObject[,,] npblocks = new GameObject[2, 3, 5];
 	AudioSource erase_weak, erase_strong;
-	bool DirectStart = true;
+	bool DirectStart = false;
 	public GameObject laser;
 	float starttimer = 3f, downrowtimer = -1f;
 

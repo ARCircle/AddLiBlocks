@@ -601,7 +601,7 @@ Prefab:
     - target: {fileID: 114860571911177384, guid: a5a0d18aaf73d0841892c67b5afdf41f,
         type: 2}
       propertyPath: playernum
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1565588715430722, guid: a5a0d18aaf73d0841892c67b5afdf41f, type: 2}
       propertyPath: m_Name
@@ -1268,6 +1268,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Setting
+      objectReference: {fileID: 0}
+    - target: {fileID: 114860571911177384, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: playernum
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5a0d18aaf73d0841892c67b5afdf41f, type: 2}
