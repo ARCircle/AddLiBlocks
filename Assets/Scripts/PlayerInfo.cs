@@ -62,6 +62,7 @@ public class PlayerInfo{
 					ans.y = -1f;
 				}
 				if (!effect) {
+					B5row = 0;
 					myself.AuraOff ();
 					DownStack ();
 					myself.Set (nextmino[0], 0);
@@ -96,22 +97,24 @@ public class PlayerInfo{
 				compcnt++;
 			}
 		}
+		if (compcnt <= 0) {
+			effect = false;
+		}
 		return compcnt;
 	}
 
 	public bool UseB5(){    // 直前のミノの追加ブロックを利用して揃えたか
 		bool ans = false;
-		Debug.Log ("B5row : " + B5row);
+		//Debug.Log ("B5row : " + B5row);
 		for (int i = 0; i < HEIGHT; i++) {
 			if (c_row [i] == 0) {
 				break;
 			} else if (c_row [i] == B5row) {
 				ans = true;
-				Debug.Log ("useB5");
+				//Debug.Log ("useB5");
 				break;
 			}
 		}
-		B5row = 0;
 		return ans;
 	}
 

@@ -34,7 +34,7 @@ public class Mino : MonoBehaviour {
 	}
 
 	void Update () {
-		if (doStartDelay) {	
+		if (doStartDelay && World.Plr[pnum].mino_controling) {	
 			
 			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
 			float angle = Input.GetAxis (pstring + "RightRotate");
@@ -168,6 +168,7 @@ public class Mino : MonoBehaviour {
 		}
 		if (isFinal) {
 			World.Plr [pnum].mino_controling = false;
+			World.Plr [pnum].effect = true;
 		}
 	}
 

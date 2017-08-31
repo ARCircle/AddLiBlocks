@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	GameObject blockprefab;
 	GameObject[,] nextplace = new GameObject[2, 3];
 	GameObject[,,] npblocks = new GameObject[2, 3, 5];
+	public GameObject laser;
+	float starttimer = 3f, downrowtimer = -1f;
 
 	// Use this for initialization
 	void Start () {
@@ -97,22 +99,46 @@ public class GameManager : MonoBehaviour {
 
 		for (int i = 0; i < 2; i++) {
 			if (attack [i].y != 0) {
-				// 列の上昇
 				int pow = (int)attack [i].x;
-				int uprows = 0;
-				if (pow > 0) {
-					if (pow <= 3) {
-						uprows = pow - 1;
+				if (World.Plr [i].effect) {
+					if (downrowtimer < 0f) {
+						for (int j = 0; j < pow; j++) {
+							int select_y = World.Plr [i].c_row [j];
+							GameObject tmp = Instantiate<GameObject> (laser);
+							tmp.transform.position = new Vector3 (-17f + 23f * i, select_y - 11f, -1f);
+							if (attack [i].y > 0) {
+								BeamParam BP = tmp.GetComponent<BeamParam> ();
+								BP.BeamColor = new Color (1f, 0.7f, 1f);
+								BP.Scale = 4f;
+								BP.AnimationSpd = 0.03f;
+							}
+							//tmp.transform.rotation = Quaternion.Euler (0f, 90f, 0f);
+						}
+						downrowtimer = 100.12f;
 					} else {
-						uprows = pow;
+						downrowtimer -= Time.deltaTime;
+						if (downrowtimer < 100f) {
+							World.Plr [i].effect = false;
+							downrowtimer = -1f;
+						}
 					}
-					if (attack [i].y > 0f) {
-						uprows += 1;
+				} else {
+					// 列の上昇
+					int uprows = 0;
+					if (pow > 0) {
+						if (pow <= 3) {
+							uprows = pow - 1;
+						} else {
+							uprows = pow;
+						}
+						if (attack [i].y > 0f) {
+							uprows += 1;
+						}
+						World.Plr [1 - i].UpStack (uprows);
 					}
-					World.Plr [1-i].UpStack (uprows);
+					// ミノの更新
+					SetNextMino (i);
 				}
-				// ミノの更新
-				SetNextMino (i);
 			}
 		}
 	}
@@ -124,14 +150,14 @@ public class GameManager : MonoBehaviour {
 				for (int j = 0; j < 5; j++){
 					int m = World.Plr [pnum].mino [n].cell [i, j];					
 					if (m > 0) {
+						npblocks [pnum, h, m - 1].transform.localPosition = new Vector3 (j, i, 0);
+						npblocks [pnum, h, m - 1].GetComponent<Renderer> ().material.color = World.coler [n];
 						/*if (n == 7) {
 							for (int k = 0; k < 5; k++) {
 								npblocks [pnum, h, k].transform.localPosition = new Vector3 (j, i, k);
 								npblocks [pnum, h, k].GetComponent<Renderer> ().material.color = World.coler [n];
 							}
 						} else {*/
-							npblocks [pnum, h, m - 1].transform.localPosition = new Vector3 (j, i, 0);
-							npblocks [pnum, h, m - 1].GetComponent<Renderer> ().material.color = World.coler [n];
 						//}
 					}
 				}
