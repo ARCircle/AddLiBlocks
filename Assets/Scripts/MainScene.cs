@@ -72,6 +72,15 @@ public class MainScene : MonoBehaviour {
 				World.Plr [1-i].UpStack (uprows);
 			}
 		}
-
+		/*World.ClearConsole ();
+		string test = "";
+		for (int i = 20; i >= 1; i--) {
+			test = i + " : ";
+			for (int j = 1; j <= 10; j++) {
+				int val = World.Plr [1].stage [j, i];
+				test += val;
+			}
+			Debug.Log (test);
+		}*/
 	}
 }

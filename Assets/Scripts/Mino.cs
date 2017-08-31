@@ -12,7 +12,7 @@ public class Mino : MonoBehaviour {
 	int[,] basecell;    // cellの値 0=空白, 1~4=通常ブロック, 5=追加ブロック
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
-	int rot = 0; //0, 1, 2, 3
+	int nowrot = 0, nextrot = 0; //0, 1, 2, 3
 	float timer = 0f, clock = 0.5f, accel = 10f;
 
 	GameObject boxbase;
@@ -89,12 +89,11 @@ public class Mino : MonoBehaviour {
 		World.Plr[pnum].mino_controling = true;
 		now_x = 4; now_y = 23;
 		next_x = 4; next_y = 23;
-		rot = 0; timer = 0f;
+		nowrot = 0; nextrot = 0; timer = 0f;
+		Color[] coler = new Color[]{Color.blue, Color.red, Color.yellow};
+		int rnd = Random.Range (0, 3);
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
-			box [i] = Instantiate<GameObject> (boxbase);
-			box [i].transform.localPosition = new Vector3 (now_x, now_y, 0f);
-			box [i].transform.SetParent (useobj.transform);
-			box [i].GetComponent<MeshRenderer> ().enabled = true;
+			box [i] = MakeBlock (now_x, now_y, coler[rnd], useobj.transform);
 		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
@@ -108,15 +107,16 @@ public class Mino : MonoBehaviour {
 			next_y += 1;
 	}
 
-	public GameObject MakeBlock(){
+	public GameObject MakeBlock(int xx, int yy, Color col, Transform parentobj){   // ブロック作成
 		GameObject tmp = Instantiate<GameObject> (boxbase);
-		tmp.transform.localPosition = new Vector3 (now_x, now_y, 0f);
-		tmp.transform.SetParent (useobj.transform);
 		tmp.GetComponent<MeshRenderer> ().enabled = true;
+		tmp.GetComponent<Renderer> ().material.color = col;
+		tmp.transform.SetParent (parentobj);
+		tmp.transform.localPosition = new Vector3 (xx, yy, 0f);
 		return tmp;
 	}
 
-	bool InRangeCheck(int a, int b) {
+	bool InRangeCheck(int a, int b) {    // 枠外判定
 		if (a < 0 || b < 0) {
 			return false;
 		} else {
@@ -129,6 +129,7 @@ public class Mino : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nowcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
+					//Debug.Log ("" + nowcell [j, i] + " : j=" + j + ", i=" + i);
 					if (isFinal) {
 						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
 					}
@@ -159,6 +160,7 @@ public class Mino : MonoBehaviour {
 	void now2next(){    // 移動予定位置を取り消し
 		next_x = now_x;
 		next_y = now_y;
+		nextrot = nowrot;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				nextcell [j, i] = nowcell [j, i];
@@ -169,6 +171,7 @@ public class Mino : MonoBehaviour {
 	void next2now(){    // 現在位置を移動予定位置に書き換え
 		now_x = next_x;
 		now_y = next_y;
+		nowrot = nextrot;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				nowcell [j, i] = nextcell [j, i];
@@ -177,11 +180,11 @@ public class Mino : MonoBehaviour {
 	}
 
 	void Rotating(int degree){     //degree分だけ90度時計回り  degree = 0, 1, 2, 3
-		rot = (rot + degree) % 4;
+		nextrot = (nextrot + degree) % 4;
 		Vector2 mps;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				mps = Chgxy (j, i, rot);
+				mps = Chgxy (j, i, nextrot);
 				nextcell [(int)mps.y, (int)mps.x] = basecell [j, i];
 			}
 		}
