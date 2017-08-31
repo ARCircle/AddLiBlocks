@@ -91,8 +91,8 @@ public class Mino : MonoBehaviour {
 		next_x = 4; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
 		Color[] coler = new Color[]{Color.blue, Color.red, Color.yellow};
-		int rnd = Random.Range (0, 3);
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
+			int rnd = Random.Range (0, 3);
 			box [i] = MakeBlock (now_x, now_y, coler[rnd], useobj.transform);
 		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
@@ -132,6 +132,7 @@ public class Mino : MonoBehaviour {
 					//Debug.Log ("" + nowcell [j, i] + " : j=" + j + ", i=" + i);
 					if (isFinal) {
 						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
+						//Debug.Log ((j + tmpx) + "," + (i + tmpy));
 					}
 					box [nowcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
 				}

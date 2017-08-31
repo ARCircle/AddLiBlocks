@@ -147,13 +147,16 @@ public class PlayerInfo{
 		} else {
 			stage [jj, ii] = stage [jj, ii - upslide];
 			if (blocks_stack [jj, ii - upslide] != null) {
+				if (blocks_stack [jj, ii] != null) {
+					blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
+					blocks_stack [jj, ii] = null;
+				}
+				blocks_stack [jj, ii - upslide].transform.localPosition = new Vector3 (jj, ii, 0);
 				blocks_stack [jj, ii] = blocks_stack [jj, ii - upslide];
-				blocks_stack [jj, ii].transform.localPosition = new Vector3 (jj, ii, 0);
 				blocks_stack [jj, ii - upslide] = null;
 			} else {
 				if (blocks_stack [jj, ii] != null) {
 					blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
-					Debug.Log ("i=" + ii + " j=" + jj + " : " + blocks_stack [jj, ii - upslide]);
 					blocks_stack [jj, ii] = null;
 				}
 			}

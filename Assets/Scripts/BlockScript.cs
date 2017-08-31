@@ -14,12 +14,6 @@ public class BlockScript : MonoBehaviour {
 		
 	}*/
 
-	public GameObject CopyMyself(){
-		GameObject tmp = Instantiate<GameObject> (this.gameObject);
-		tmp.transform.SetParent (this.transform.parent);
-		return tmp;
-	}
-
 	public void Suicide(){
 		Destroy (this.gameObject);
 	}
