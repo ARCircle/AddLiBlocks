@@ -90,10 +90,9 @@ public class Mino : MonoBehaviour {
 		now_x = 4; now_y = 23;
 		next_x = 4; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
-		Color[] coler = new Color[]{Color.blue, Color.red, Color.yellow};
+		Color[] coler = new Color[]{Color.cyan, Color.blue, Color.magenta, Color.yellow, Color.green, Color.red, new Color(1f, 0.5f, 0f)};
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
-			int rnd = Random.Range (0, 3);
-			box [i] = MakeBlock (now_x, now_y, coler[rnd], useobj.transform);
+			box [i] = MakeBlock (now_x, now_y, coler[minonum], useobj.transform);
 		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);

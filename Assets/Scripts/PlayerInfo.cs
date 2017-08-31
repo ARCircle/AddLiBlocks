@@ -52,9 +52,9 @@ public class PlayerInfo{
 				ans.x = checkLine ();
 				if(UseB5 ())
 					ans.y = 1f;
-				DownStack ();
 				if (!effect) {
-					myself.Set (Random.Range (0, 1), 0);
+					DownStack ();
+					myself.Set (Random.Range (0, 7), 0);
 				}
 			}
 		}
