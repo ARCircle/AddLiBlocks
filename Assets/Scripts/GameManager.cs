@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		// < 本来必要ない部分 -始め- >
-		World.setPlayerInfo ();
+		/*World.setPlayerInfo ();
 		World.Plr [0].mino [0].SetCell (new int[,] {
 			{ 0, 0, 1, 0, 0 },
 			{ 0, 0, 2, 0, 0 },
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
 			{ 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0 }
 		});*/
-		World.Plr [1].mino = World.Plr [0].mino;
+		//World.Plr [1].mino = World.Plr [0].mino;
 		// < 本来必要ない部分 -終わり- >
 	}
 
