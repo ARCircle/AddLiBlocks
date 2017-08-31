@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class SettingText : MonoBehaviour {
 	public Text text;
 
-	public static void Input(){
+	public void Input(){
 		text.text = "Please choice add Block";
 	}
 
-	public static void Wait(){
+	public void Wait(){
 		text.text = "Please wait";
 	}
 }

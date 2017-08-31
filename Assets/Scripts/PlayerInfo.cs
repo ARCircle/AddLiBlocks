@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInfo{
-	public const int MINONUM = 3, HEIGHT = 20, WIDTH = 10;
+	public const int MINONUM = 7, HEIGHT = 20, WIDTH = 10;
 	public bool mino_controling = false;
 	public int[,] stage = new int[WIDTH + 2, HEIGHT + 6];  // 値が0=空白, 9=壁, 1~4=通常ブロック, 5=追加ブロック
 	public GameObject[,] blocks_stack = new GameObject[WIDTH + 2, HEIGHT + 6];

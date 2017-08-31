@@ -8,6 +8,7 @@ public class SettingScript : MonoBehaviour {
 	public int minonum;
 	public int playernum;
 	public PlayerButtonScript script;
+	public SettingText st;
 	string xLine;
 	string yLine;
 
@@ -46,7 +47,7 @@ public class SettingScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		World.setPlayerInfo ();
-		SettingText.Input ();
+		st.Input ();
 
 		B1 = obj1.GetComponent<Button> ();
 		B2 = obj2.GetComponent<Button> ();
@@ -377,7 +378,7 @@ public class SettingScript : MonoBehaviour {
 
 				script.setting = false;
 
-				SettingText.Wait ();
+				st.Wait ();
 			}
 			break;
 			}
