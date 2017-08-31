@@ -13,6 +13,7 @@ public class Mino : MonoBehaviour {
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
 	int nowrot = 0, nextrot = 0; //0, 1, 2, 3
+	bool agaki = false; int agalim = 5;
 	float timer = 0f, clock = 0.5f, accel = 10f;
 
 	GameObject boxbase;
@@ -38,12 +39,29 @@ public class Mino : MonoBehaviour {
 			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
 			float angle = Input.GetAxis (pstring + "RightRotate");
 			if (anglepush) {
-				if (angle > 0.1f)    // ミノの右回転
-					Rotating (1);
-				else if (angle < -0.1f)    // ミノの左回転
-					Rotating (3);
-				if (CheckEnable ())    // 実際にブロック移動
-					PutBoxes (false);
+				int[] mvx = new int[]{ 0, -1, 1, -2, 2 };
+				if (angle > 0.1f) {    // ミノの右回転
+					agaki = true;
+					for (int i = 0; i < 5; i++){
+						Rotating (1);
+						next_x += mvx [i];
+						if (CheckEnable ()) {    // 実際にブロック移動
+							PutBoxes (false);
+							break;
+						}
+					}
+				} else if (angle < -0.1f) {   // ミノの左回転
+					agaki = true;
+					for (int i = 0; i < 5; i++){
+						Rotating (3);
+						next_x += mvx [i];
+						if (CheckEnable ()) {    // 実際にブロック移動
+							PutBoxes (false);
+							break;
+						}
+					}
+				}
+
 			}
 
 			bool movepush = Input.GetButtonDown (pstring + "RightMove");
@@ -66,7 +84,16 @@ public class Mino : MonoBehaviour {
 			}
 			if (timer > clock) {  // ミノの自動落下
 				next_y -= 1;
-				PutBoxes (!CheckEnable ());
+				if (!CheckEnable ()) {
+					if (agaki && agalim > 0) {
+						agalim -= 1;
+					} else {
+						PutBoxes (true);
+					}
+				} else {
+					PutBoxes (false);
+				}
+				agaki = false;
 				timer = 0f;
 			}
 
@@ -90,9 +117,11 @@ public class Mino : MonoBehaviour {
 		now_x = 4; now_y = 23;
 		next_x = 4; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
-		Color[] coler = new Color[]{Color.cyan, Color.blue, Color.magenta, Color.yellow, Color.green, Color.red, new Color(1f, 0.5f, 0f)};
+		agaki = false; agalim = 10;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
-			box [i] = MakeBlock (now_x, now_y, coler[minonum], useobj.transform);
+			box [i] = MakeBlock (now_x, now_y, World.coler[minonum], useobj.transform);
+			if (i == 4)
+				box [i].GetComponent<BlockScript> ().aura = true;
 		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
@@ -137,8 +166,15 @@ public class Mino : MonoBehaviour {
 				}
 			}
 		}
-		if (isFinal)
-			World.Plr[pnum].mino_controling = false;
+		if (isFinal) {
+			World.Plr [pnum].mino_controling = false;
+		}
+	}
+
+	public void AuraOff(){    // 追加ブロックの光をオフ
+		if (box [4] != null) {
+			box [4].GetComponent<BlockScript> ().StopAura ();
+		}
 	}
 
 	bool CheckEnable(){    // 動けるか判定

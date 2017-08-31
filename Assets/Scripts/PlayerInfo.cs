@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInfo{
-	public const int MINONUM = 7, HEIGHT = 20, WIDTH = 10;
+	public const int MINONUM = 7, HEIGHT = 20, WIDTH = 10;//, MINIBLOCK = 10000;
 	public bool mino_controling = false;
+	public int[] nextmino = new int[]{0, 0, 0};
 	public int[,] stage = new int[WIDTH + 2, HEIGHT + 6];  // 値が0=空白, 9=壁, 1~4=通常ブロック, 5=追加ブロック
 	public GameObject[,] blocks_stack = new GameObject[WIDTH + 2, HEIGHT + 6];
 	public MinoShape[] mino = new MinoShape[MINONUM];
 	public Mino myself;
 	public Transform stackobj;
+	//int minib_cnt = 0;
 
 	// そろったとき専用の変数
 	//GameObject target;
@@ -34,6 +36,10 @@ public class PlayerInfo{
 		for (int i = 0; i < HEIGHT; i++){
 			c_row[i] = 0;
 		}
+		for (int i = 0; i < 3; i++){
+			nextmino [i] = Random.Range (0, MINONUM - 1);
+			//minib_cnt++;
+		}
 	}
 
 	public void InputStack(int xx, int yy, int value, GameObject oneblock){  // ミノをコントロール外へ
@@ -50,11 +56,24 @@ public class PlayerInfo{
 		if (myself != null) {
 			if (!mino_controling) {
 				ans.x = checkLine ();
-				if(UseB5 ())
+				if (UseB5 ()) {
 					ans.y = 1f;
+				} else {
+					ans.y = -1f;
+				}
 				if (!effect) {
+					myself.AuraOff ();
 					DownStack ();
-					myself.Set (Random.Range (0, 7), 0);
+					myself.Set (nextmino[0], 0);
+					nextmino [0] = nextmino [1];
+					nextmino [1] = nextmino [2];
+					nextmino [2] = Random.Range (0, MINONUM - 1);
+					//minib_cnt++;
+					//if (minib_cnt < MINIBLOCK) {
+					//} else {
+					//	nextmino [2] = MINONUM - 1;
+					//	minib_cnt = 0;
+					//}
 				}
 			}
 		}
@@ -63,16 +82,16 @@ public class PlayerInfo{
 
 	public int checkLine(){  // そろっている行があるかチェック
 		int compcnt = 0;
-		bool complete = true;
+		int complete = 0;
 		for (int i = 1; i <= HEIGHT; i++) {
-			complete = true;
+			complete = 0;
 			for (int j = 1; j <= WIDTH; j++){
 				if (stage [j, i] == 0) {    // そろってないことを検知
-					complete = false;
-					break;
+					complete++;
+					//break;
 				}
 			}
-			if (complete) {
+			if (complete <= 1) {
 				c_row [compcnt] = i;
 				compcnt++;
 			}
@@ -82,11 +101,13 @@ public class PlayerInfo{
 
 	public bool UseB5(){    // 直前のミノの追加ブロックを利用して揃えたか
 		bool ans = false;
+		Debug.Log ("B5row : " + B5row);
 		for (int i = 0; i < HEIGHT; i++) {
 			if (c_row [i] == 0) {
 				break;
 			} else if (c_row [i] == B5row) {
 				ans = true;
+				Debug.Log ("useB5");
 				break;
 			}
 		}
@@ -110,7 +131,7 @@ public class PlayerInfo{
 	}
 
 	public void UpStack(int upnum){    // 相手からの攻撃
-		int spacex = 0;
+		int space1 = 0, space2 = 0;
 		for(int h = 0; h < upnum; h++){
 			myself.UpRow ();
 			for (int i = 20; i > 0; i--) {
@@ -118,16 +139,18 @@ public class PlayerInfo{
 					BlockSlide (j, i, 1);
 				}
 			}
-			spacex = Random.Range (1, 11);
+			space1 = Random.Range (0, 10);
+			space2 = (space1 + Random.Range (0, 9)) % 10 + 1;
+			space1 += 1;
 			for (int j = 1; j <= 10; j++){
-				if (j != spacex) {
+				if (j != space1 && j != space2) {
 					stage [j, 1] = 1;
 					blocks_stack [j, 1] = myself.MakeBlock (j, 1, Color.gray, stackobj);
 				} else {
-					stage [spacex, 1] = 0;
-					if (blocks_stack [spacex, 1] != null) {
-						blocks_stack [spacex, 1].GetComponent<BlockScript> ().Suicide ();
-						blocks_stack [spacex, 1] = null;
+					stage [j, 1] = 0;
+					if (blocks_stack [j, 1] != null) {
+						blocks_stack [j, 1].GetComponent<BlockScript> ().Suicide ();
+						blocks_stack [j, 1] = null;
 					}
 				}
 			}

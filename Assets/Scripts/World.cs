@@ -5,6 +5,17 @@ using UnityEngine;
 public static class World {	
 	public static PlayerInfo[] Plr = new PlayerInfo[2];
 
+	public static Color[] coler = new Color[]{
+		Color.cyan,
+		Color.blue,
+		Color.magenta,
+		Color.yellow, 
+		Color.green,
+		Color.red, 
+		new Color(1f, 0.5f, 0f)
+		//,new Color(1f, 0f, 1f)
+	};
+
 	public static void setPlayerInfo(){
 		Plr [0] = new PlayerInfo ();
 		Plr [1] = new PlayerInfo ();
