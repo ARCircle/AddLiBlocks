@@ -128,12 +128,11 @@ public class Mino : MonoBehaviour {
 		int tmpx = now_x - 2, tmpy = now_y - 2;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (nextcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
+				if (nowcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
 					if (isFinal) {
-						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, 
-							nextcell [j, i], box [nextcell [j, i] - 1]);
+						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
 					}
-					box [nextcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
+					box [nowcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
 				}
 			}
 		}
