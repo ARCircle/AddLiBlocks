@@ -135,58 +135,28 @@ public class PlayerInfo{
 	}
 
 	void BlockSlide(int jj, int ii, int upslide){   // たまっているブロックを任意の段数だけ上下移動 移動先を指定
-		if (ii < 1 || HEIGHT < ii) {
+		if (ii < 1 || HEIGHT < ii || upslide == 0) {
 			return;
 		}
 		else if (ii - upslide < 1 || HEIGHT < ii - upslide) {
 			stage [jj, ii] = 0;
 			if (blocks_stack [jj, ii] != null) {
 				blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
-				//blocks_stack [jj, ii] = null;
+				blocks_stack [jj, ii] = null;
 			}
 		} else {
 			stage [jj, ii] = stage [jj, ii - upslide];
 			if (blocks_stack [jj, ii - upslide] != null) {
-				blocks_stack [jj, ii] = blocks_stack [jj, ii - upslide].GetComponent<BlockScript> ().CopyMyself();
+				blocks_stack [jj, ii] = blocks_stack [jj, ii - upslide];
 				blocks_stack [jj, ii].transform.localPosition = new Vector3 (jj, ii, 0);
-				blocks_stack [jj, ii - upslide].GetComponent<BlockScript> ().Suicide();
-				Debug.Log("pos" + blocks_stack [jj, ii].transform.localPosition);
+				blocks_stack [jj, ii - upslide] = null;
 			} else {
 				if (blocks_stack [jj, ii] != null) {
 					blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
-					//blocks_stack [jj, ii] = null;
+					Debug.Log ("i=" + ii + " j=" + jj + " : " + blocks_stack [jj, ii - upslide]);
+					blocks_stack [jj, ii] = null;
 				}
 			}
 		}
 	}
-
-	/*void BlockSlide(int jj, int ii, int upslide){   // たまっているブロックを任意の段数だけ上下移動
-		if (ii < 1 || HEIGHT < ii) {
-			Debug.Log ("x:" + jj + ",y=" + ii + " outof_frame_range");
-			return;
-		}
-		else if (ii + Mathf.Abs(upslide) < 1 || HEIGHT < ii + Mathf.Abs(upslide)) {
-			stage [jj, ii] = 0;
-			if (blocks_stack [jj, ii] != null) {
-				Debug.Log ("x:" + jj + ",y=" + ii + " outof_move_range");
-				blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
-				blocks_stack [jj, ii] = null;
-			}
-		} else {
-			stage [jj, ii + upslide] = stage [jj, ii];
-			if (blocks_stack [jj, ii] != null) {
-				Debug.Log ("x:" + jj + ",y=" + ii + " move");
-				blocks_stack [jj, ii + upslide] = blocks_stack [jj, ii];
-				blocks_stack [jj, ii + upslide].transform.localPosition = new Vector3 (jj, ii + upslide, 0);
-				blocks_stack [jj, ii] = null;
-			} else {
-				if (blocks_stack [jj, ii + upslide] != null) {
-					Debug.Log ("x:" + jj + ",y=" + ii + " moveclear");
-					blocks_stack [jj, ii + upslide].GetComponent<BlockScript> ().Suicide ();
-					blocks_stack [jj, ii + upslide] = null;
-				}
-			}
-		}
-	}
-	*/
 }
