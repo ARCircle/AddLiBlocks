@@ -9,6 +9,7 @@ public class SettingScript : MonoBehaviour {
 	public int playernum;
 	public PlayerButtonScript script;
 	public SettingText st;
+	public SettingButtonText ok;
 	string xLine;
 	string yLine;
 
@@ -38,16 +39,23 @@ public class SettingScript : MonoBehaviour {
 	public GameObject obj24;
 	public GameObject obj25;
 
+	public GameObject P1Button;
+	public GameObject P2Button;
+
 	Button B1; Button B2; Button B3; Button B4; Button B5;
 	Button B6; Button B7; Button B8; Button B9; Button B10;
 	Button B11; Button B12; Button B13; Button B14; Button B15;
 	Button B16; Button B17; Button B18; Button B19; Button B20;
 	Button B21; Button B22; Button B23; Button B24; Button B25;
 
+	Button P1;
+	Button P2;
+
 	// Use this for initialization
 	void Start () {
 		World.setPlayerInfo ();
 		st.Input ();
+		ok.NextText ();
 
 		B1 = obj1.GetComponent<Button> ();
 		B2 = obj2.GetComponent<Button> ();
@@ -74,6 +82,9 @@ public class SettingScript : MonoBehaviour {
 		B23 = obj23.GetComponent<Button> ();
 		B24 = obj24.GetComponent<Button> ();
 		B25 = obj25.GetComponent<Button> ();
+
+		P1 = P1Button.GetComponent<Button> ();
+		P2 = P2Button.GetComponent<Button> ();
 
 	}
 	
@@ -132,6 +143,8 @@ public class SettingScript : MonoBehaviour {
 					World.SettingMino (playernum, minonum, minocells);
 				    minonum++;
 					minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+				B2.interactable = true;
+				B6.interactable = true;
 				B8.interactable = true;
 				B13.interactable = true;
 				B18.interactable = true;
@@ -149,23 +162,23 @@ public class SettingScript : MonoBehaviour {
 			minocells [2, 2] = 2;
 			minocells [2, 3] = 3;
 			minocells [2, 4] = 4;
-			B8.interactable = false;
+			B7.interactable = false;
 			B12.interactable = false;
 			B13.interactable = false;
 			B14.interactable = false;
 
-			B2.interactable = false;
+			B3.interactable = false;
 			B4.interactable = false;
 			B22.interactable = false;
 			B23.interactable = false;
 			B24.interactable = false;
 
-			ColorManager.BtnStateColorChange (B8, Color.blue, 3);
+			ColorManager.BtnStateColorChange (B7, Color.blue, 3);
 			ColorManager.BtnStateColorChange (B12, Color.blue, 3);
 			ColorManager.BtnStateColorChange (B13, Color.blue, 3);
 			ColorManager.BtnStateColorChange (B14, Color.blue, 3);
 
-			ColorManager.BtnStateColorChange (B2, Color.gray, 3);
+			ColorManager.BtnStateColorChange (B3, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B4, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B22, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B23, Color.gray, 3);
@@ -175,6 +188,7 @@ public class SettingScript : MonoBehaviour {
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
 				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+				B7.interactable = true;
 				B8.interactable = true;
 				B12.interactable = true;
 				B13.interactable = true;
@@ -196,14 +210,17 @@ public class SettingScript : MonoBehaviour {
 			B12.interactable = false;
 			B13.interactable = false;
 			B14.interactable = false;
-			ColorManager.BtnStateColorChange (B9, Color.cyan, 3);
-			ColorManager.BtnStateColorChange (B12, Color.cyan, 3);
-			ColorManager.BtnStateColorChange (B13, Color.cyan, 3);
-			ColorManager.BtnStateColorChange (B14, Color.cyan, 3);
+			ColorManager.BtnStateColorChange (B9, Color.magenta, 3);
+			ColorManager.BtnStateColorChange (B12, Color.magenta, 3);
+			ColorManager.BtnStateColorChange (B13, Color.magenta, 3);
+			ColorManager.BtnStateColorChange (B14, Color.magenta, 3);
 
+			B2.interactable = false;
 			B3.interactable = false;
-			ColorManager.BtnStateColorChange (B3, Color.gray, 3);
+			B6.interactable = false;
 
+			ColorManager.BtnStateColorChange (B2, Color.gray, 3);
+			ColorManager.BtnStateColorChange (B3, Color.gray, 3);
 		
 			if (script.setting) {
 				World.SettingMino (playernum, minonum, minocells);
@@ -308,10 +325,10 @@ public class SettingScript : MonoBehaviour {
 			B12.interactable = false;
 			B13.interactable = false;
 			B14.interactable = false;
-			ColorManager.BtnStateColorChange (B8, Color.black, 3);
-			ColorManager.BtnStateColorChange (B12, Color.black, 3);
-			ColorManager.BtnStateColorChange (B13, Color.black, 3);
-			ColorManager.BtnStateColorChange (B14, Color.black, 3);
+			ColorManager.BtnStateColorChange (B8, new Color (1f, 0.5f, 0f), 3);
+			ColorManager.BtnStateColorChange (B12, new Color (1f, 0.5f, 0f), 3);
+			ColorManager.BtnStateColorChange (B13, new Color (1f, 0.5f, 0f), 3);
+			ColorManager.BtnStateColorChange (B14, new Color (1f, 0.5f, 0f), 3);
 
 			B4.interactable = false;
 			B10.interactable = false;
@@ -331,6 +348,9 @@ public class SettingScript : MonoBehaviour {
 				B6.interactable = true;
 
 				script.setting = false;
+
+				ok.OKText ();
+
 			}
 			break;
 		case 6:
@@ -358,29 +378,54 @@ public class SettingScript : MonoBehaviour {
 				minonum++;
 				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
 
-				B1.interactable = true;
-				B4.interactable = true;
-				B5.interactable = true;
-				B7.interactable = true;
-				B8.interactable = true;
-				B10.interactable = true;
-				B11.interactable = true;
-				B13.interactable = true;
-				B14.interactable = true;
-				B16.interactable = true;
-				B17.interactable = true;
-				B20.interactable = true;
-				B21.interactable = true;
-				B22.interactable = true;
-				B23.interactable = true;
-				B24.interactable = true;
-				B25.interactable = true;
+				B1.interactable = false;
+				B2.interactable = false;
+				B3.interactable = false;
+				B4.interactable = false;
+				B5.interactable = false;
+				B6.interactable = false;
+				B7.interactable = false;
+				B8.interactable = false;
+				B9.interactable = false;
+				B10.interactable = false;
+				B11.interactable = false;
+				B12.interactable = false;
+				B13.interactable = false;
+				B14.interactable = false;
+				B15.interactable = false;
+				B16.interactable = false;
+				B17.interactable = false;
+				B18.interactable = false;
+				B19.interactable = false;
+				B20.interactable = false;
+				B21.interactable = false;
+				B22.interactable = false;
+				B23.interactable = false;
+				B24.interactable = false;
+				B25.interactable = false;
+
+				ColorManager.BtnStateColorChange (B7, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B8, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B9, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B12, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B13, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B14, Color.gray, 3);
+				ColorManager.BtnStateColorChange (B18, Color.gray, 3);
 
 				script.setting = false;
 
+				if (playernum == 1) {
+					SettingSceneManager.P1 = true;
+					P1.interactable = false;
+					ColorManager.BtnStateColorChange (P1, Color.gray, 3);
+				} else if (playernum == 2) {
+					SettingSceneManager.P2 = true;
+					P2.interactable = false;
+					ColorManager.BtnStateColorChange (P2, Color.gray, 3);
+				}
 				st.Wait ();
 			}
 			break;
-			}
+		}
 	}
 }
