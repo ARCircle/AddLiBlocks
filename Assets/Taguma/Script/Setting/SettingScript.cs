@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingScript : MonoBehaviour {
-	public int[,] minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+	public int[,] minocells = new int[5, 5];
+	public int[,] minocellsDefault = new int[5, 5];
+	public int[,] minocellsInput = new int[5, 5];
 	public int minonum;
 	public int playernum;
 	public PlayerButtonScript script;
@@ -93,10 +95,10 @@ public class SettingScript : MonoBehaviour {
 			switch (minonum) {
 		case 0:
 			//B1.Select ();
-			minocells [1, 3] = 1;
-			minocells [2, 3] = 2;
-			minocells [3, 3] = 3;
-			minocells [4, 3] = 4;
+			minocellsDefault [1, 2] = 1;
+			minocellsDefault [2, 2] = 2;
+			minocellsDefault [3, 2] = 3;
+			minocellsDefault [4, 2] = 4;
 
 			B8.interactable = false;
 			B13.interactable = false;
@@ -104,6 +106,8 @@ public class SettingScript : MonoBehaviour {
 			B23.interactable = false;
 
 			B1.interactable = false;
+			B2.interactable = false;
+			B4.interactable = false;
 			B5.interactable = false;
 			B6.interactable = false;
 			B10.interactable = false;
@@ -120,6 +124,8 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B23, Color.cyan, 3);
 
 			ColorManager.BtnStateColorChange (B1, Color.gray, 3);
+			ColorManager.BtnStateColorChange (B2, Color.gray, 3);
+			ColorManager.BtnStateColorChange (B4, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B5, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B6, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B10, Color.gray, 3);
@@ -130,19 +136,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B21, Color.gray, 3);
 			ColorManager.BtnStateColorChange (B25, Color.gray, 3);
 
-
-
-			/*for (int x = 0; x < 5; x++) {
-				xLine = x.ToString();
-				for (int y = 0; y < 5; y++) {
-					yLine = y.ToString();
-					Debug.Log (xLine + yLine +" = " + minocells[x,y]);
-				}
-			}*/
 			if (script.setting) {
-					World.SettingMino (playernum, minonum, minocells);
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
+				World.SettingMino (playernum, minonum, minocells);
 				    minonum++;
-					minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+				minocellsDefault [1, 2] = 0;
+				minocellsDefault [2, 2] = 0;
+				minocellsDefault [3, 2] = 0;
+				minocellsDefault [4, 2] = 0;
+
 				B2.interactable = true;
 				B6.interactable = true;
 				B8.interactable = true;
@@ -158,10 +175,10 @@ public class SettingScript : MonoBehaviour {
 				break;
 		case 1:
 			//B1.Select ();
-			minocells [1, 2] = 1;
-			minocells [2, 2] = 2;
-			minocells [2, 3] = 3;
-			minocells [2, 4] = 4;
+			minocellsDefault [1, 1] = 1;
+			minocellsDefault [2, 1] = 2;
+			minocellsDefault [2, 2] = 3;
+			minocellsDefault [2, 3] = 4;
 			B7.interactable = false;
 			B12.interactable = false;
 			B13.interactable = false;
@@ -185,9 +202,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B24, Color.gray, 3);
 
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 1] = 0;
+				minocellsDefault [2, 1] = 0;
+				minocellsDefault [2, 2] = 0;
+				minocellsDefault [2, 3] = 0;
+
 				B7.interactable = true;
 				B8.interactable = true;
 				B12.interactable = true;
@@ -202,10 +240,10 @@ public class SettingScript : MonoBehaviour {
 			break;
 		case 2:
 			//B1.Select ();
-			minocells [1, 4] = 1;
-			minocells [2, 2] = 2;
-			minocells [2, 3] = 3;
-			minocells [2, 4] = 4;
+			minocellsDefault [1, 3] = 1;
+			minocellsDefault [2, 1] = 2;
+			minocellsDefault [2, 2] = 3;
+			minocellsDefault [2, 3] = 4;
 			B9.interactable = false;
 			B12.interactable = false;
 			B13.interactable = false;
@@ -223,9 +261,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B3, Color.gray, 3);
 		
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 3] = 0;
+				minocellsDefault [2, 1] = 0;
+				minocellsDefault [2, 2] = 0;
+				minocellsDefault [2, 3] = 0;
+
 				B9.interactable = true;
 				B12.interactable = true;
 				B13.interactable = true;
@@ -240,10 +299,10 @@ public class SettingScript : MonoBehaviour {
 			break;
 		case 3:
 			//B1.Select ();
-			minocells [1, 2] = 1;
-			minocells [1, 3] = 2;
-			minocells [2, 2] = 3;
-			minocells [2, 3] = 4;
+			minocellsDefault [1, 1] = 1;
+			minocellsDefault [1, 2] = 2;
+			minocellsDefault [2, 1] = 3;
+			minocellsDefault [2, 2] = 4;
 			B7.interactable = false;
 			B8.interactable = false;
 			B12.interactable = false;
@@ -263,9 +322,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B19, Color.gray, 3);
 
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 1] = 0;
+				minocellsDefault [1, 2] = 0;
+				minocellsDefault [2, 1] = 0;
+				minocellsDefault [2, 2] = 0;
+
 				B7.interactable = true;
 				B8.interactable = true;
 				B12.interactable = true;
@@ -280,10 +360,10 @@ public class SettingScript : MonoBehaviour {
 			break;
 		case 4:
 			//B1.Select ();
-			minocells [1, 3] = 1;
-			minocells [1, 4] = 2;
-			minocells [2, 2] = 3;
-			minocells [2, 3] = 4;
+			minocellsDefault [1, 2] = 1;
+			minocellsDefault [1, 3] = 2;
+			minocellsDefault [2, 1] = 3;
+			minocellsDefault [2, 2] = 4;
 			B8.interactable = false;
 			B9.interactable = false;
 			B12.interactable = false;
@@ -301,9 +381,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B15, Color.gray, 3);
 
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 2] = 0;
+				minocellsDefault [1, 3] = 0;
+				minocellsDefault [2, 1] = 0;
+				minocellsDefault [2, 2] = 0;
+
 				B8.interactable = true;
 				B9.interactable = true;
 				B12.interactable = true;
@@ -317,10 +418,10 @@ public class SettingScript : MonoBehaviour {
 			break;
 		case 5:
 			//B1.Select ();
-			minocells [1, 3] = 1;
-			minocells [2, 2] = 2;
-			minocells [2, 3] = 3;
-			minocells [2, 4] = 4;
+			minocellsDefault [1, 2] = 1;
+			minocellsDefault [2, 1] = 2;
+			minocellsDefault [2, 2] = 3;
+			minocellsDefault [2, 3] = 4;
 			B8.interactable = false;
 			B12.interactable = false;
 			B13.interactable = false;
@@ -336,9 +437,30 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B10, Color.gray, 3);
 
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 2] = 0;
+				minocellsDefault [2, 1] = 0;
+				minocellsDefault [2, 2] = 0;
+				minocellsDefault [2, 3] = 0;
+
 				B8.interactable = true;
 				B12.interactable = true;
 				B13.interactable = true;
@@ -355,10 +477,10 @@ public class SettingScript : MonoBehaviour {
 			break;
 		case 6:
 			//B1.Select ();
-			minocells [1, 2] = 1;
-			minocells [1, 3] = 2;
-			minocells [2, 3] = 3;
-			minocells [2, 4] = 4;
+			minocellsDefault [1, 1] = 1;
+			minocellsDefault [1, 2] = 2;
+			minocellsDefault [2, 2] = 3;
+			minocellsDefault [2, 3] = 4;
 			B7.interactable = false;
 			B8.interactable = false;
 			B13.interactable = false;
@@ -374,9 +496,29 @@ public class SettingScript : MonoBehaviour {
 			ColorManager.BtnStateColorChange (B17, Color.gray, 3);
 
 			if (script.setting) {
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						minocells[x,y] = minocellsDefault[x,y] + minocellsInput[x,y];
+						Debug.Log (x + "," + y + ":" + minocells [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsDefault [x, y]);
+					}
+				}
+				for (int x = 0; x < 5; x++) {
+					for (int y = 0; y < 5; y++) {
+						Debug.Log (x + "," + y + ":" + minocellsInput [x, y]);
+					}
+				}
 				World.SettingMino (playernum, minonum, minocells);
 				minonum++;
-				minocells = new int[,]{{0, 0, 0, 0, 0} , {0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} ,{0, 0, 0, 0, 0} };
+
+				minocellsDefault [1, 1] = 0;
+				minocellsDefault [1, 2] = 0;
+				minocellsDefault [2, 2] = 0;
+				minocellsDefault [2, 3] = 0;
 
 				B1.interactable = false;
 				B2.interactable = false;
