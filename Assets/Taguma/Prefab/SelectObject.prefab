@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114612621447729928}
   - component: {fileID: 114568353662217724}
   m_Layer: 5
-  m_Name: Button9
+  m_Name: P1Button9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 114643505509667624}
   - component: {fileID: 114337470569013976}
   m_Layer: 5
-  m_Name: Button13
+  m_Name: P1Button13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 114393953885958760}
   - component: {fileID: 114781269162188668}
   m_Layer: 5
-  m_Name: Button24
+  m_Name: P1Button24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 114237819097798632}
   - component: {fileID: 114278428252723342}
   m_Layer: 5
-  m_Name: Button7
+  m_Name: P1Button7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 114039408864111392}
   - component: {fileID: 114090852393358452}
   m_Layer: 5
-  m_Name: Button21
+  m_Name: P1Button21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 114170454400578284}
   - component: {fileID: 114235226682666730}
   m_Layer: 5
-  m_Name: Button12
+  m_Name: P1Button12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 114156116275873360}
   - component: {fileID: 114684250717096964}
   m_Layer: 5
-  m_Name: Button14
+  m_Name: P1Button14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 114547140909220008}
   - component: {fileID: 114157941189765512}
   m_Layer: 5
-  m_Name: Button10
+  m_Name: P1Button10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 114168576250624102}
   - component: {fileID: 114698547368677488}
   m_Layer: 5
-  m_Name: Button11
+  m_Name: P1Button11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 114689228976305178}
   - component: {fileID: 114726030459837408}
   m_Layer: 5
-  m_Name: Button8
+  m_Name: P1Button8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 114425340882652708}
   - component: {fileID: 114616286288112476}
   m_Layer: 5
-  m_Name: Button17
+  m_Name: P1Button17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 114739850312063612}
   - component: {fileID: 114454520604041884}
   m_Layer: 5
-  m_Name: Button15
+  m_Name: P1Button15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 114846245096467534}
   - component: {fileID: 114109577834340678}
   m_Layer: 5
-  m_Name: Button19
+  m_Name: P1Button19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 114655027535068786}
   - component: {fileID: 114131506816549026}
   m_Layer: 5
-  m_Name: Button18
+  m_Name: P1Button18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4222987752636604}
   m_Layer: 0
-  m_Name: Line1
+  m_Name: P1Line1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 114689587189790296}
   - component: {fileID: 114909004505043092}
   m_Layer: 5
-  m_Name: Button3
+  m_Name: P1Button3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4464856008602792}
   m_Layer: 0
-  m_Name: Line5
+  m_Name: P1Line5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 114597229147209308}
   - component: {fileID: 114877536498752930}
   m_Layer: 5
-  m_Name: Button25
+  m_Name: P1Button25
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 114311259896980002}
   - component: {fileID: 114604344377018230}
   m_Layer: 5
-  m_Name: Button4
+  m_Name: P1Button4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 114370402786539998}
   - component: {fileID: 114293514635881388}
   m_Layer: 5
-  m_Name: Button23
+  m_Name: P1Button23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 114963817075510410}
   - component: {fileID: 114175929399111428}
   m_Layer: 5
-  m_Name: Button5
+  m_Name: P1Button5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 114750002436803942}
   - component: {fileID: 114414812218482752}
   m_Layer: 5
-  m_Name: Button16
+  m_Name: P1Button16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 114158988012166648}
   - component: {fileID: 114425625136124242}
   m_Layer: 5
-  m_Name: Button20
+  m_Name: P1Button20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 114879802683853358}
   - component: {fileID: 114926528022266416}
   m_Layer: 5
-  m_Name: Button6
+  m_Name: P1Button6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 114776214882567104}
   - component: {fileID: 114052065645263686}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: P1Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 114707496385597270}
   - component: {fileID: 114551899798382060}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: P1Button1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,7 +879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4986333204591390}
   m_Layer: 0
-  m_Name: Line3
+  m_Name: P1Line3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -911,7 +911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4289769897591930}
   m_Layer: 0
-  m_Name: Line2
+  m_Name: P1Line2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -977,7 +977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4968867238649970}
   m_Layer: 0
-  m_Name: Line4
+  m_Name: P1Line4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 114570918020730504}
   - component: {fileID: 114414434333713026}
   m_Layer: 5
-  m_Name: Button22
+  m_Name: P1Button22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1045,7 +1045,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1114622687524524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -223, y: 42, z: 0}
+  m_LocalPosition: {x: -190, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4222987752636604}
@@ -1142,7 +1142,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114039408864111392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1295,7 +1295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114090852393358452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1356,7 +1356,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114131506816549026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1403,7 +1403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114151096492958136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1581,7 +1581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114168576250624102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1718,7 +1718,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114175929399111428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1765,7 +1765,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114235226682666730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1946,7 +1946,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114311259896980002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2446,7 +2446,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114461426998646134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2479,7 +2479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114503820370003666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2566,7 +2566,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114547140909220008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2665,7 +2665,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114568353662217724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2830,7 +2830,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114612621447729928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2929,7 +2929,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114626759543384790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2962,7 +2962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114643505509667624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3047,7 +3047,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114655027535068786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3132,7 +3132,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114665984048355966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3165,7 +3165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114684250717096964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3330,7 +3330,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114706859656810958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3442,7 +3442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114726030459837408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3767,7 +3767,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114836735223771836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3906,7 +3906,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114860571911177384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3919,33 +3919,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minonum: 0
-  playernum: 0
+  playernum: 1
   script: {fileID: 0}
+  st: {fileID: 0}
   obj1: {fileID: 1866664162042694}
   obj2: {fileID: 1833278773783056}
   obj3: {fileID: 1570866021415876}
-  obj4: {fileID: 0}
+  obj4: {fileID: 1623849633840074}
   obj5: {fileID: 1727674405550832}
-  obj6: {fileID: 0}
-  obj7: {fileID: 0}
-  obj8: {fileID: 0}
-  obj9: {fileID: 0}
+  obj6: {fileID: 1774605417854780}
+  obj7: {fileID: 1173176003143116}
+  obj8: {fileID: 1442843160230092}
+  obj9: {fileID: 1009436134489690}
   obj10: {fileID: 1337068383878428}
   obj11: {fileID: 1379342660275220}
-  obj12: {fileID: 0}
-  obj13: {fileID: 0}
+  obj12: {fileID: 1261879493056028}
+  obj13: {fileID: 1084208842948930}
   obj14: {fileID: 1303436275364638}
-  obj15: {fileID: 0}
-  obj16: {fileID: 0}
+  obj15: {fileID: 1499043362455142}
+  obj16: {fileID: 1741367064414460}
   obj17: {fileID: 1448205255375452}
   obj18: {fileID: 1510321469877920}
-  obj19: {fileID: 0}
+  obj19: {fileID: 1507737109352790}
   obj20: {fileID: 1762601474299240}
   obj21: {fileID: 1210202165620798}
-  obj22: {fileID: 0}
-  obj23: {fileID: 0}
+  obj22: {fileID: 1989881648853812}
+  obj23: {fileID: 1670850974826692}
   obj24: {fileID: 1148239200530116}
-  obj25: {fileID: 0}
+  obj25: {fileID: 1615382702909130}
 --- !u!114 &114877536498752930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3992,7 +3993,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114879802683853358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4104,7 +4105,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!114 &114908954126806602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4298,7 +4299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &222037897780036444
 CanvasRenderer:
   m_ObjectHideFlags: 1
