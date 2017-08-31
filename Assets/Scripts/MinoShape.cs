@@ -12,7 +12,7 @@
 	public void SetCell(int[,] inputcells){
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				this.cell [j, i] = inputcells [j, i];
+				this.cell [j, i] = inputcells [j, 4 - i];
 			}
 		}
 	}

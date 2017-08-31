@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	GameObject blockprefab;
 	GameObject[,] nextplace = new GameObject[2, 3];
 	GameObject[,,] npblocks = new GameObject[2, 3, 5];
+	AudioSource erase_weak, erase_strong;
+	bool DirectStart = true;
 	public GameObject laser;
 	float starttimer = 3f, downrowtimer = -1f;
 
@@ -27,118 +29,127 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
+		GameObject audioobj = GameObject.Find ("Audios");
+		erase_weak = audioobj.transform.Find ("shoukyo").GetComponent<AudioSource> ();
+		erase_strong = audioobj.transform.Find ("power_shoukyo").GetComponent<AudioSource> ();
 
-		// < 本来必要ない部分 -始め- >
-		World.setPlayerInfo ();
-		World.Plr [0].mino [0].SetCell (new int[,] {
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 0, 2, 0, 0 },
-			{ 0, 0, 3, 0, 0 },
-			{ 0, 0, 4, 0, 0 },
-			{ 0, 0, 5, 0, 0 }
-		});
-		World.Plr [0].mino [1].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 4, 2, 5, 0 },
-			{ 0, 0, 3, 0, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});
-		World.Plr [0].mino [2].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 1, 0, 0, 0 },
-			{ 0, 2, 0, 0, 0 },
-			{ 0, 3, 4, 5, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});
-		World.Plr [0].mino [3].SetCell (new int[,] {
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 0, 2, 0, 0 },
-			{ 0, 0, 3, 0, 0 },
-			{ 0, 5, 4, 0, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});
-		World.Plr [0].mino [4].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 3, 0 },
-			{ 0, 0, 2, 4, 0 },
-			{ 0, 0, 0, 5, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});
-		World.Plr [0].mino [5].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 0, 2, 3, 0 },
-			{ 0, 0, 0, 4, 0 },
-			{ 0, 0, 0, 5, 0 }
-		});
-		World.Plr [0].mino [6].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 3, 2, 0, 0 },
-			{ 5, 4, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});/*
-		World.Plr [0].mino [7].SetCell (new int[,] {
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0 },
-			{ 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0 }
-		});*/
-		World.Plr [1].mino = World.Plr [0].mino;
+		if (DirectStart) {
+			// < 本来必要ない部分 -始め- >
+			World.setPlayerInfo ();
+			World.Plr [0].mino [0].SetCell (new int[,] {
+				{ 0, 0, 1, 0, 0 },
+				{ 0, 0, 2, 0, 0 },
+				{ 0, 0, 3, 0, 0 },
+				{ 0, 0, 4, 0, 0 },
+				{ 0, 0, 5, 0, 0 }
+			});
+			World.Plr [0].mino [1].SetCell (new int[,] {
+				{ 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 0 },
+				{ 0, 4, 2, 5, 0 },
+				{ 0, 0, 3, 0, 0 },
+				{ 0, 0, 0, 0, 0 }
+			});
+			World.Plr [0].mino [2].SetCell (new int[,] {
+				{ 0, 0, 0, 0, 0 },
+				{ 0, 1, 0, 0, 0 },
+				{ 0, 2, 0, 0, 0 },
+				{ 0, 3, 4, 5, 0 },
+				{ 0, 0, 0, 0, 0 }
+			});
+			World.Plr [0].mino [3].SetCell (new int[,] {
+				{ 0, 0, 1, 0, 0 },
+				{ 0, 0, 2, 0, 0 },
+				{ 0, 0, 3, 0, 0 },
+				{ 0, 5, 4, 0, 0 },
+				{ 0, 0, 0, 0, 0 }
+			});
+			World.Plr [0].mino [4].SetCell (new int[,] {
+				{ 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 3, 0 },
+				{ 0, 0, 2, 4, 0 },
+				{ 0, 0, 0, 5, 0 },
+				{ 0, 0, 0, 0, 0 }
+			});
+			World.Plr [0].mino [5].SetCell (new int[,] {
+				{ 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 0 },
+				{ 0, 0, 2, 3, 0 },
+				{ 0, 0, 0, 4, 0 },
+				{ 0, 0, 0, 5, 0 }
+			});
+			World.Plr [0].mino [6].SetCell (new int[,] {
+				{ 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 0 },
+				{ 0, 3, 2, 0, 0 },
+				{ 5, 4, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0 }
+			});
+			World.Plr [1].mino = World.Plr [0].mino;
+		}
 		// < 本来必要ない部分 -終わり- >
+
+		SetNextMino (0);
+		SetNextMino (1);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		Vector2[] attack = new Vector2[2]{    //attack[].x ...揃ったライン数
-			World.Plr [0].Judge (),           //attack[].y ...0 = 判定期間外  -1 = 判定期間内
-			World.Plr [1].Judge ()            //              1 = 判定期間内 & 追加ブロックを使用している
-		};
-
-		for (int i = 0; i < 2; i++) {
-			if (attack [i].y != 0) {
-				int pow = (int)attack [i].x;
-				if (World.Plr [i].effect) {
-					if (downrowtimer < 0f) {
-						for (int j = 0; j < pow; j++) {
-							int select_y = World.Plr [i].c_row [j];
-							GameObject tmp = Instantiate<GameObject> (laser);
-							tmp.transform.position = new Vector3 (-17f + 23f * i, select_y - 11f, -1f);
-							if (attack [i].y > 0) {
-								BeamParam BP = tmp.GetComponent<BeamParam> ();
-								BP.BeamColor = new Color (1f, 0.7f, 1f);
-								BP.Scale = 4f;
-								BP.AnimationSpd = 0.03f;
+		if (World.gameover < 0) {
+			if (starttimer < 0f) {
+				Vector2[] attack = new Vector2[2] {    //attack[].x ...揃ったライン数
+					World.Plr [0].Judge (),           //attack[].y ...0 = 判定期間外  -1 = 判定期間内
+					World.Plr [1].Judge ()            //              1 = 判定期間内 & 追加ブロックを使用している
+				};
+				for (int i = 0; i < 2; i++) {
+					if (attack [i].y != 0) {
+						int pow = (int)attack [i].x;
+						if (World.Plr [i].effect) {
+							if (downrowtimer < 0f) {
+								for (int j = 0; j < pow; j++) {
+									int select_y = World.Plr [i].c_row [j];
+									GameObject tmp = Instantiate<GameObject> (laser);
+									tmp.transform.position = new Vector3 (-17f + 23f * i, select_y - 11f, -1f);
+									if (attack [i].y > 0) {
+										BeamParam BP = tmp.GetComponent<BeamParam> ();
+										BP.BeamColor = new Color (1f, 0.7f, 1f);
+										BP.Scale = 4f;
+										BP.AnimationSpd = 0.03f;
+										erase_strong.PlayOneShot (erase_strong.clip);
+									} else {
+										erase_weak.PlayOneShot (erase_weak.clip);
+									}
+									//tmp.transform.rotation = Quaternion.Euler (0f, 90f, 0f);
+								}
+								downrowtimer = 100.12f;
+							} else {
+								downrowtimer -= Time.deltaTime;
+								if (downrowtimer < 100f) {
+									World.Plr [i].effect = false;
+									downrowtimer = -1f;
+								}
 							}
-							//tmp.transform.rotation = Quaternion.Euler (0f, 90f, 0f);
-						}
-						downrowtimer = 100.12f;
-					} else {
-						downrowtimer -= Time.deltaTime;
-						if (downrowtimer < 100f) {
-							World.Plr [i].effect = false;
-							downrowtimer = -1f;
-						}
-					}
-				} else {
-					// 列の上昇
-					int uprows = 0;
-					if (pow > 0) {
-						if (pow <= 3) {
-							uprows = pow - 1;
 						} else {
-							uprows = pow;
+							// 列の上昇
+							int uprows = 0;
+							if (pow > 0) {
+								if (pow <= 3) {
+									uprows = pow - 1;
+								} else {
+									uprows = pow;
+								}
+								if (attack [i].y > 0f) {
+									uprows += 1;
+								}
+								World.Plr [1 - i].UpStack (uprows);
+							}
+							// ミノの更新
+							SetNextMino (i);
 						}
-						if (attack [i].y > 0f) {
-							uprows += 1;
-						}
-						World.Plr [1 - i].UpStack (uprows);
 					}
-					// ミノの更新
-					SetNextMino (i);
 				}
+			} else {
+				starttimer -= Time.deltaTime;
 			}
 		}
 	}

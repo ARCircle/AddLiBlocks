@@ -143,7 +143,7 @@ public class PlayerInfo{
 				}
 			}
 			space1 = Random.Range (0, 10);
-			space2 = (space1 + Random.Range (0, 9)) % 10 + 1;
+			space2 = (space1 + Random.Range (1, 10)) % 10 + 1;
 			space1 += 1;
 			for (int j = 1; j <= 10; j++){
 				if (j != space1 && j != space2) {

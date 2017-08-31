@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class World {	
 	public static PlayerInfo[] Plr = new PlayerInfo[2];
+	public static int gameover = -1;
 
 	public static Color[] coler = new Color[]{
 		Color.cyan,

@@ -7,8 +7,8 @@ public class Mino : MonoBehaviour {
 	string pstring;
 	bool doStartDelay = false;
 
-	int now_x = 4, now_y = 23;
-	int next_x = 4, next_y = 23;
+	int now_x = 5, now_y = 23;
+	int next_x = 5, next_y = 23;
 	int[,] basecell;    // cellの値 0=空白, 1~4=通常ブロック, 5=追加ブロック
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
@@ -16,6 +16,7 @@ public class Mino : MonoBehaviour {
 	bool agaki = false; int agalim = 5;
 	float timer = 0f, clock = 0.5f, accel = 10f;
 
+	AudioSource turn, landing;
 	GameObject boxbase;
 	GameObject useobj;
 	GameObject[] box = new GameObject[5];
@@ -30,11 +31,14 @@ public class Mino : MonoBehaviour {
 		useobj = transform.Find("UseBlocks").gameObject;
 		World.Plr [pnum].stackobj = transform.Find("BlockStack");
 		World.Plr [pnum].myself = this;
+		GameObject audioobj = GameObject.Find ("Audios");
+		turn = audioobj.transform.Find ("kaiten").GetComponent<AudioSource> ();
+		landing = audioobj.transform.Find ("chakuchi").GetComponent<AudioSource> ();
 		doStartDelay = true;
 	}
 
 	void Update () {
-		if (doStartDelay && World.Plr[pnum].mino_controling) {	
+		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {	
 			
 			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
 			float angle = Input.GetAxis (pstring + "RightRotate");
@@ -47,6 +51,7 @@ public class Mino : MonoBehaviour {
 						next_x += mvx [i];
 						if (CheckEnable ()) {    // 実際にブロック移動
 							PutBoxes (false);
+							turn.PlayOneShot (turn.clip);
 							break;
 						}
 					}
@@ -57,6 +62,7 @@ public class Mino : MonoBehaviour {
 						next_x += mvx [i];
 						if (CheckEnable ()) {    // 実際にブロック移動
 							PutBoxes (false);
+							turn.PlayOneShot (turn.clip);
 							break;
 						}
 					}
@@ -107,15 +113,15 @@ public class Mino : MonoBehaviour {
 			}
 			timer += Time.deltaTime;
 
-		} else {
+		} else if (!doStartDelay){
 			StartDelay ();
 		}
 	}
 
 	public void Set(int minonum, int rotnum){    // ミノの取得
 		World.Plr[pnum].mino_controling = true;
-		now_x = 4; now_y = 23;
-		next_x = 4; next_y = 23;
+		now_x = 5; now_y = 23;
+		next_x = 5; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
 		agaki = false; agalim = 10;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
@@ -126,6 +132,9 @@ public class Mino : MonoBehaviour {
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
 		next2now ();
+		if (!CheckEnable ()) {
+			World.gameover = pnum;
+		}
 	}
 
 	public void UpRow(){    //一段上昇時、操作中のミノも一段上昇させる
@@ -139,6 +148,7 @@ public class Mino : MonoBehaviour {
 		GameObject tmp = Instantiate<GameObject> (boxbase);
 		tmp.GetComponent<MeshRenderer> ().enabled = true;
 		tmp.GetComponent<Renderer> ().material.color = col;
+		tmp.GetComponent<BlockScript> ().SetPnum(pnum);
 		tmp.transform.SetParent (parentobj);
 		tmp.transform.localPosition = new Vector3 (xx, yy, 0f);
 		return tmp;
@@ -169,6 +179,7 @@ public class Mino : MonoBehaviour {
 		if (isFinal) {
 			World.Plr [pnum].mino_controling = false;
 			World.Plr [pnum].effect = true;
+			landing.PlayOneShot (landing.clip);
 		}
 	}
 
