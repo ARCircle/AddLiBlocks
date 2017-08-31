@@ -126,12 +126,16 @@ public class PlayerInfo{
 	public void UpStack(int upnum){    // 相手からの攻撃
 		for(int h = 0; h < upnum; h++){
 			myself.UpRow ();
-			for (int i = 20; i > 0; i--) {
+			for (int i = 19; i > 0; i--) {
 				for (int j = 1; j <= 10; j++){
-					stage [j, i + 1] = stage [j, i];
-					blocks_stack [j, i + 1] = blocks_stack [j, i];
 					if (blocks_stack [j, i] != null) {
+						stage [j, i + 1] = stage [j, i];
 						blocks_stack [j, i].transform.localPosition = new Vector3 (j, i + 1, 0);
+						blocks_stack [j, i + 1] = blocks_stack [j, i];
+					} else {
+						stage [j, i + 1] = 0;
+						blocks_stack [j, i].transform.localPosition = new Vector3 (j, i + 1, 0);
+						blocks_stack [j, i + 1] = null;
 					}
 				}
 			}
@@ -149,6 +153,13 @@ public class PlayerInfo{
 					}
 				}
 			}
+		}
+	}
+
+	void BlockDestroy(GameObject blk){
+		if (blk != null) {
+			blk.GetComponent<BlockScript> ().Suicide ();
+			blk = null;
 		}
 	}
 }
