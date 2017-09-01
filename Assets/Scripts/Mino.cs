@@ -43,9 +43,9 @@ public class Mino : MonoBehaviour {
 			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
 			float angle = Input.GetAxis (pstring + "RightRotate");
 			if (anglepush) {
+				agaki = true;
 				int[] mvx = new int[]{ 0, -1, 1, -2, 2 };
 				if (angle > 0.1f) {    // ミノの右回転
-					agaki = true;
 					for (int i = 0; i < 5; i++){
 						Rotating (1);
 						next_x += mvx [i];
@@ -56,7 +56,6 @@ public class Mino : MonoBehaviour {
 						}
 					}
 				} else if (angle < -0.1f) {   // ミノの左回転
-					agaki = true;
 					for (int i = 0; i < 5; i++){
 						Rotating (3);
 						next_x += mvx [i];
@@ -73,6 +72,7 @@ public class Mino : MonoBehaviour {
 			bool movepush = Input.GetButtonDown (pstring + "RightMove");
 			float move = Input.GetAxis (pstring + "RightMove");
 			if (movepush) {
+				agaki = true;
 				if (move > 0.1f)   // ミノの右移動
 					next_x += 1;
 				else if (move < -0.1f)   // ミノの左移動

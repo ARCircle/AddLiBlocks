@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour {
 									int select_y = World.Plr [i].c_row [j];
 									GameObject tmp = Instantiate<GameObject> (laser);
 									tmp.transform.position = new Vector3 (-17f + 23f * i, select_y - 11f, -1f);
-									if (attack [i].y > 0) {
+									if (select_y == World.Plr[i].B5row){//attack [i].y > 0) {
 										BeamParam BP = tmp.GetComponent<BeamParam> ();
 										BP.BeamColor = new Color (1f, 0.7f, 1f);
 										BP.Scale = 4f;
