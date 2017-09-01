@@ -171,6 +171,7 @@ public class SettingScript : MonoBehaviour {
 				B15.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
 				}
 				break;
 		case 1:
@@ -236,6 +237,8 @@ public class SettingScript : MonoBehaviour {
 				B10.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
+
 			}
 			break;
 		case 2:
@@ -295,6 +298,8 @@ public class SettingScript : MonoBehaviour {
 				B6.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
+
 			}
 			break;
 		case 3:
@@ -356,6 +361,8 @@ public class SettingScript : MonoBehaviour {
 				B15.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
+
 			}
 			break;
 		case 4:
@@ -414,6 +421,8 @@ public class SettingScript : MonoBehaviour {
 				B19.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
+
 			}
 			break;
 		case 5:
@@ -470,6 +479,8 @@ public class SettingScript : MonoBehaviour {
 				B6.interactable = true;
 
 				script.setting = false;
+				script.playerButton.interactable = false;
+
 
 				ok.OKText ();
 

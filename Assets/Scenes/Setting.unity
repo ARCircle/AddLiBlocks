@@ -1572,6 +1572,131 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114926528022266416, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114454520604041884, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114131506816549026, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114414434333713026, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114568353662217724, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114090852393358452, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114157941189765512, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114604344377018230, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114293514635881388, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114781269162188668, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114052065645263686, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114235226682666730, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114551899798382060, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114616286288112476, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114698547368677488, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114425625136124242, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114337470569013976, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114109577834340678, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114726030459837408, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114414812218482752, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114684250717096964, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114877536498752930, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114278428252723342, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114909004505043092, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
+    - target: {fileID: 114175929399111428, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 952540777}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 0}
@@ -2959,6 +3084,131 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114425625136124242, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114414812218482752, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114551899798382060, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114926528022266416, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114604344377018230, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114278428252723342, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114698547368677488, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114781269162188668, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114052065645263686, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114090852393358452, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114131506816549026, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114877536498752930, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114157941189765512, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114909004505043092, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114454520604041884, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114414434333713026, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114726030459837408, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114175929399111428, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114684250717096964, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114337470569013976, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114568353662217724, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114109577834340678, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114235226682666730, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114293514635881388, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
+    - target: {fileID: 114616286288112476, guid: a5a0d18aaf73d0841892c67b5afdf41f,
+        type: 2}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 813277197}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5a0d18aaf73d0841892c67b5afdf41f, type: 2}
   m_IsPrefabParent: 0
@@ -3308,6 +3558,7 @@ MonoBehaviour:
   setting: 0
   P1: 0
   P2: 0
+  playerButton: {fileID: 813277194}
 --- !u!114 &833352009 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114909004505043092, guid: a5a0d18aaf73d0841892c67b5afdf41f,
@@ -3651,6 +3902,7 @@ MonoBehaviour:
   setting: 0
   P1: 0
   P2: 0
+  playerButton: {fileID: 952540774}
 --- !u!114 &975333646 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114293514635881388, guid: a5a0d18aaf73d0841892c67b5afdf41f,
