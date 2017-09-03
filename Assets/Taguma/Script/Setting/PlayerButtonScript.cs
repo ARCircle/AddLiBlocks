@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerButtonScript : MonoBehaviour {
+    /*
 	public bool setting = false;
 	public bool P1 = false;
 	public bool P2 = false;
@@ -18,5 +19,5 @@ public class PlayerButtonScript : MonoBehaviour {
 
 	public void PlayerButtonTrigger(){
 		setting = true;
-	}
+	}*/
 }

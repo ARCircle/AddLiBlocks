@@ -2,69 +2,96 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class SettingScene : MonoBehaviour {
-	/*
-	int row = 0;
-	int column = 0;
-	public int pnum;
-	string pname, pstring;
-	Button b, next;
-	//StandaloneInputModule eve;
 
-	// Use this for initialization
-	void Start () {
-		//eve = GameObject.Find ("EventSystem").GetComponent<StandaloneInputModule>();
-		int cnt = 0;
-		pname = "P" + pnum;
-		pstring = pnum + "P_";
-		do {
-			row = cnt / 5;
-			column = cnt % 5;
-			b = GetSelectButton ();
-		} while (b.transition.ToString() != "Disabled");
-		b.Select ();
-		next = transform.parent.Find (pname + "Button").GetComponent<Button> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {/
-		bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
-		float angle = Input.GetAxis (pstring + "RightRotate");
-		if (anglepush) {
-			if (angle > 0.1f)
-				next.OnPointerClick (eve.Getpo);
-		}
-		bool movepush = Input.GetButtonDown (pstring + "RightMove");
-		float move = Input.GetAxis (pstring + "RightMove");
-		if (movepush) {
-			if (move > 0.1f)    // ミノの右移動
-				column = (column + 1) % 5;
-			else if (move < -0.1f)   // ミノの左移動
-				column = (column - 1) % 5;
-			EventSystem.current.
-			b = GetSelectButton ();
-			b.OnPointerClick (eve);
-		}
-		bool updownpush = Input.GetButtonDown (pstring + "Down");
-		float updown = Input.GetAxis (pstring + "Down");
-		if (updownpush) {
-			if (updown > 0.1f)
-				row = (row + 1) % 5;
-			else if (updown < -0.1f)
-				row = (row - 1) % 5;
-			b = GetSelectButton ();
-			b.OnPointerClick (eve);
-		}
-	}
+    int row = 0;
+    int column = 0;
+    public int pnum;
+    string pname, pstring;
+    Button b;
+    Color HL = new Color(0.9f, 1f, 0f);
+    int[,] ajust = new int[,] { { 1, 0 }, { 0, 1 }, { 0, 8 }, { 1, 1 }, { 1, 0 }, { 1, 0 }, { 1, 0 } };
+    AudioSource focus;
 
-	Button GetSelectButton(){
-		Button tmp = transform
-			.Find (pname + "Line" + (row + 1))
-			.Find (pname + "Button" + (row * 5 + column + 1))
-			.GetComponent<Button> ();
-		return tmp;
-	}
-	*/
+    // Use this for initialization
+    void Start() {
+        pname = "P" + pnum;
+        pstring = pnum + "P_";
+        focus = transform.parent.Find("BackGround 1").GetComponent<AudioSource>();
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if(b != null) {
+            int cnt = 0;
+            bool anglepush = Input.GetButtonDown(pstring + "RightRotate");
+            float angle = Input.GetAxis(pstring + "RightRotate");
+            bool movepush = Input.GetButtonDown(pstring + "RightMove");
+            float move = Input.GetAxis(pstring + "RightMove");
+            bool updownpush = Input.GetButtonDown(pstring + "Down");
+            float updown = Input.GetAxis(pstring + "Down");
+
+            do {
+                if(anglepush) {
+                    if(angle > 0.1f)
+                        b.GetComponent<SettingButtonScript>().Setting();
+                }
+                if(movepush) {
+                    if(move > 0.1f) {
+                        column = (column + ajust[cnt, 0]) % 5;
+                        row = (row + ajust[cnt, 1]) % 5;
+                    } else if(move < -0.1f) {
+                        column = (column + ajust[cnt, 0] * 4) % 5;
+                        row = (row + ajust[cnt, 1] * 4) % 5;
+                    }
+                    b = GetSelectButton();
+                }
+                if(updownpush) {
+                    if(updown > 0.1f) {
+                        row = (row + ajust[cnt, 0]) % 5;
+                        column = (column + ajust[cnt, 1]) % 5;
+                    } else if(updown < -0.1f) {
+                        row = (row + ajust[cnt, 0] * 4) % 5;
+                        column = (column + ajust[cnt, 1] * 4) % 5;
+                    }
+                    b = GetSelectButton();
+                }
+                cnt = (cnt + 1) % 7;
+            } while(!b.interactable);
+
+            if (movepush || updownpush) {
+                focus.PlayOneShot(focus.clip);
+            }
+        }
+    }
+
+
+    public void SetFirstButton() {
+        int cnt = 0;
+        do {
+            row = cnt / 5;
+            column = cnt % 5;
+            b = GetSelectButton();
+            cnt++;
+        } while(!b.interactable);
+    }
+
+    Button GetSelectButton() {
+        Debug.Log(pname + "Line" + (row + 1));
+        Debug.Log(pname + "Button" + (row * 5 + column + 1));
+
+        if(b != null)
+            ColorManager.BtnStateColorChange(b, Color.white, 0);
+        Button tmp = transform
+            .Find(pname + "Line" + (row + 1))
+            .Find(pname + "Button" + (row * 5 + column + 1))
+            .GetComponent<Button>();
+        ColorManager.BtnStateColorChange(tmp, HL, 0);
+        return tmp;
+    }
+
+    public void SelectEnd() {
+        b = null;
+    }
 }

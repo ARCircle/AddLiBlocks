@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingButtonText : MonoBehaviour {
-
+    /*
 	public Text ButtonText;
 
 	public void NextText(){
@@ -13,5 +13,5 @@ public class SettingButtonText : MonoBehaviour {
 
 	public void OKText(){
 		ButtonText.text = "OK!";
-	}
+	}*/
 }

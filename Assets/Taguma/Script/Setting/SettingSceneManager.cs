@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SettingSceneManager : MonoBehaviour {
-	public static bool P1;
-	public static bool P2;
+	public bool P1;
+	public bool P2;
 	public GameObject SceneMoveEffect;
 	public Text ayr;
 
