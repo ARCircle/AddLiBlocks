@@ -78,9 +78,6 @@ public class SettingScene : MonoBehaviour {
     }
 
     Button GetSelectButton() {
-        Debug.Log(pname + "Line" + (row + 1));
-        Debug.Log(pname + "Button" + (row * 5 + column + 1));
-
         if(b != null)
             ColorManager.BtnStateColorChange(b, Color.white, 0);
         Button tmp = transform

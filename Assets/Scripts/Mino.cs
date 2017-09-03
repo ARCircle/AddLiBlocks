@@ -6,7 +6,7 @@ public class Mino : MonoBehaviour {
 	public int pnum = 0;
 	string pstring;
 	bool doStartDelay = false;
-
+    
 	int now_x = 5, now_y = 23;
 	int next_x = 5, next_y = 23;
 	int[,] basecell;    // cellの値 0=空白, 1~4=通常ブロック, 5=追加ブロック
@@ -132,9 +132,9 @@ public class Mino : MonoBehaviour {
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
 		next2now ();
-		if (!CheckEnable ()) {
-			World.gameover = pnum;
-		}
+		//if (!CheckEnable ()) {
+		//	World.gameover = pnum;
+		//}
 	}
 
 	public void UpRow(){    //一段上昇時、操作中のミノも一段上昇させる
@@ -163,15 +163,17 @@ public class Mino : MonoBehaviour {
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
-		int tmpx = now_x - 2, tmpy = now_y - 2;
+		int tmpx = now_x - 2, tmpy = now_y - 2, max_y = 99;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nowcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
 					//Debug.Log ("" + nowcell [j, i] + " : j=" + j + ", i=" + i);
 					if (isFinal) {
 						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
-						//Debug.Log ((j + tmpx) + "," + (i + tmpy));
-					}
+                        if(max_y > i + tmpy)
+                            max_y = i + tmpy;
+                        //Debug.Log ((j + tmpx) + "," + (i + tmpy));
+                    }
 					box [nowcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
 				}
 			}
@@ -180,7 +182,9 @@ public class Mino : MonoBehaviour {
 			World.Plr [pnum].mino_controling = false;
 			World.Plr [pnum].effect = true;
 			landing.PlayOneShot (landing.clip);
-		}
+            if (max_y > 20)
+                World.gameover = pnum;
+        }
 	}
 
 	public void AuraOff(){    // 追加ブロックの光をオフ

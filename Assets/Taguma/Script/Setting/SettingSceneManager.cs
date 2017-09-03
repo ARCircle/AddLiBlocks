@@ -10,8 +10,8 @@ public class SettingSceneManager : MonoBehaviour {
 	public GameObject SceneMoveEffect;
 	public Text ayr;
 
-	bool next = false;
-	float timer = 4f;
+    bool next = false;
+	float timer = 4f, starttimer = 0.3f;
 
 	AudioSource audios;
 	Animation anim;
@@ -27,9 +27,15 @@ public class SettingSceneManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (starttimer > 0f) {
+            starttimer -= Time.deltaTime;
+            if(starttimer <= 0f) {
+                SceneMoveEffect.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+            }
+        }
 		if (P1 && P2 && !next) {
 			ayr.gameObject.SetActive (true);
-			if (Input.GetKey (KeyCode.Return)) {
+			if (Input.GetButtonDown("Submit")) {
 				next = true;
 				anim.Play ();
 				audios.PlayOneShot (audios.clip);

@@ -137,7 +137,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 2] = 0;
 				minocellsDefault [2, 2] = 0;
@@ -193,7 +194,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 1] = 0;
 				minocellsDefault [2, 1] = 0;
@@ -243,7 +245,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 3] = 0;
 				minocellsDefault [2, 1] = 0;
@@ -296,7 +299,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 1] = 0;
 				minocellsDefault [1, 2] = 0;
@@ -347,7 +351,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 2] = 0;
 				minocellsDefault [1, 3] = 0;
@@ -377,10 +382,10 @@ public class SettingScript : MonoBehaviour {
                 B12.interactable = false;
                 B13.interactable = false;
                 B14.interactable = false;
-                ColorManager.BtnStateColorChange(B8, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B12, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B13, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B14, new Color(1f, 0.5f, 0f), 3);
+                ColorManager.BtnStateColorChange(B8, Color.red, 3);
+                ColorManager.BtnStateColorChange(B12, Color.red, 3);
+                ColorManager.BtnStateColorChange(B13, Color.red, 3);
+                ColorManager.BtnStateColorChange(B14, Color.red, 3);
 
                 B4.interactable = false;
                 B10.interactable = false;
@@ -395,7 +400,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 2] = 0;
 				minocellsDefault [2, 1] = 0;
@@ -425,10 +431,10 @@ public class SettingScript : MonoBehaviour {
                 B8.interactable = false;
                 B13.interactable = false;
                 B14.interactable = false;
-                ColorManager.BtnStateColorChange(B7, Color.red, 3);
-                ColorManager.BtnStateColorChange(B8, Color.red, 3);
-                ColorManager.BtnStateColorChange(B13, Color.red, 3);
-                ColorManager.BtnStateColorChange(B14, Color.red, 3);
+                ColorManager.BtnStateColorChange(B7, new Color(1f, 0.5f, 0f), 3);
+                ColorManager.BtnStateColorChange(B8, new Color(1f, 0.5f, 0f), 3);
+                ColorManager.BtnStateColorChange(B13, new Color(1f, 0.5f, 0f), 3);
+                ColorManager.BtnStateColorChange(B14, new Color(1f, 0.5f, 0f), 3);
 
                 B11.interactable = false;
                 B17.interactable = false;
@@ -443,7 +449,8 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-				minonum++;
+                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                minonum++;
 
 				minocellsDefault [1, 1] = 0;
 				minocellsDefault [1, 2] = 0;

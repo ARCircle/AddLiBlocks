@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviour {
 	GameObject[,] nextplace = new GameObject[2, 3];
 	GameObject[,,] npblocks = new GameObject[2, 3, 5];
 	AudioSource erase_weak, erase_strong;
-	bool DirectStart = false;
+	bool DirectStart = true;
 	public GameObject laser;
 	float starttimer = 3f, downrowtimer = -1f;
 
 	// Use this for initialization
 	void Start () {
 		guide = transform;//transform.parent.Find ("NextFrameGuide");
-		Debug.Log (guide);
+		//Debug.Log (guide);
 		blockprefab = guide.Find ("Block").gameObject;
 		string[] pname = new string[]{"1P_", "2P_"};
 		for (int i = 0; i < 2; i++) {
@@ -106,22 +106,8 @@ public class GameManager : MonoBehaviour {
 						int pow = (int)attack [i].x;
 						if (World.Plr [i].effect) {
 							if (downrowtimer < 0f) {
-								for (int j = 0; j < pow; j++) {
-									int select_y = World.Plr [i].c_row [j];
-									GameObject tmp = Instantiate<GameObject> (laser);
-									tmp.transform.position = new Vector3 (-17f + 23f * i, select_y - 11f, -1f);
-									if (select_y == World.Plr[i].B5row){//attack [i].y > 0) {
-										BeamParam BP = tmp.GetComponent<BeamParam> ();
-										BP.BeamColor = new Color (1f, 0.7f, 1f);
-										BP.Scale = 4f;
-										BP.AnimationSpd = 0.03f;
-										erase_strong.PlayOneShot (erase_strong.clip);
-									} else {
-										erase_weak.PlayOneShot (erase_weak.clip);
-									}
-									//tmp.transform.rotation = Quaternion.Euler (0f, 90f, 0f);
-								}
-								downrowtimer = 100.12f;
+                                CreateLaser(i, pow);
+								downrowtimer = 100.15f;
 							} else {
 								downrowtimer -= Time.deltaTime;
 								if (downrowtimer < 100f) {
@@ -175,6 +161,36 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+
+    void CreateLaser(int p, int num) {
+        for(int j = 0; j < num; j++) {
+            int select_y = World.Plr[p].c_row[j];
+            /*for(int k = 1; k <= 10; k++) {
+                if(World.Plr[p].blocks_stack[k, select_y] != null)
+                    World.Plr[p].blocks_stack[k, select_y].GetComponent<BlockScript>().SetWhite();
+            }*/
+            GameObject tmp1 = Instantiate<GameObject>(laser);
+            GameObject tmp2 = Instantiate<GameObject>(laser);
+            tmp1.transform.position = new Vector3(-11.5f + 23f * p, select_y - 11f, -1f);
+            tmp2.transform.position = new Vector3(-11.5f + 23f * p, select_y - 11f, -1f);
+            tmp1.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            tmp2.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+            if(select_y == World.Plr[p].B5row) {//attack [i].y > 0) {
+                BeamParam BP = tmp1.GetComponent<BeamParam>();
+                BP.BeamColor = new Color(1f, 0.7f, 1f);
+                BP.Scale = 4f;
+                BP.AnimationSpd = 0.03f;
+                erase_strong.PlayOneShot(erase_strong.clip);
+                BP = tmp2.GetComponent<BeamParam>();
+                BP.BeamColor = new Color(1f, 0.7f, 1f);
+                BP.Scale = 4f;
+                BP.AnimationSpd = 0.03f;
+            } else {
+                erase_weak.PlayOneShot(erase_weak.clip);
+            }
+            //tmp.transform.rotation = Quaternion.Euler (0f, 90f, 0f);
+        }
+    }
 }
 
 

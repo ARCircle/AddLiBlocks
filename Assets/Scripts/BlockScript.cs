@@ -59,4 +59,8 @@ public class BlockScript : MonoBehaviour {
 	public void Suicide(){
 		Destroy (this.gameObject);
 	}
+
+    public void SetWhite() {
+        MyRend.material.color = Color.white;
+    }
 }
