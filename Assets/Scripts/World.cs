@@ -20,6 +20,7 @@ public static class World {
 	public static void setPlayerInfo(){
 		Plr [0] = new PlayerInfo ();
 		Plr [1] = new PlayerInfo ();
+		gameover = -1;
 	}
 
 	public static void SettingMino(int playernum, int minonum, int[,] cells){  //ミノの配置代入
