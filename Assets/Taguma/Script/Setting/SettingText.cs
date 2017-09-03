@@ -7,7 +7,7 @@ public class SettingText : MonoBehaviour {
 	public Text text;
 
 	public void Input(){
-		text.text = "Please choice add Block";
+		text.text = "Please choice \nenemy's add-Block";
 	}
 
 	public void Wait(){

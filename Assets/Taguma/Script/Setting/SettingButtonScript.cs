@@ -6,6 +6,7 @@ using UnityEngine;
 public class SettingButtonScript : MonoBehaviour {
 
 	public SettingScript script;
+	public PlayerButtonScript NextButton;
 	public int x;
 	public int y;
 	private int[,] minocells;
@@ -19,6 +20,8 @@ public class SettingButtonScript : MonoBehaviour {
 			}
 		}*/
 		script.minocellsInput = minocells;
+
+		NextButton.playerButton.interactable = true;
 
 	}
 }
