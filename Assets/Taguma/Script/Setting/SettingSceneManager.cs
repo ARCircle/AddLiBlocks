@@ -7,22 +7,25 @@ using UnityEngine.SceneManagement;
 public class SettingSceneManager : MonoBehaviour {
 	public bool P1;
 	public bool P2;
-	public GameObject SceneMoveEffect;
+    public GameObject SceneMoveEffect;
+    public GameObject[] hideobj;
 	public Text ayr;
 
-    bool next = false;
+    bool animed = false, next = false;
 	float timer = 4f, starttimer = 0.3f;
 
 	AudioSource audios;
-	Animation anim;
-	// Use this for initialization
-	void Start () {
+    Animation anim, anim1, anim2;
+    // Use this for initialization
+    void Start () {
 		P1 = false;
 		P2 = false;
 		ayr = GameObject.Find ("Are You Ready?").GetComponent<Text> ();
 		audios = SceneMoveEffect.GetComponent<AudioSource> ();
 		anim = SceneMoveEffect.GetComponent<Animation> ();
-		ayr.gameObject.SetActive (false);
+        anim1 = GameObject.Find("P1SelectedDisplay").GetComponent<Animation>();
+        anim2 = GameObject.Find("P2SelectedDisplay").GetComponent<Animation>();
+        ayr.gameObject.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -34,8 +37,16 @@ public class SettingSceneManager : MonoBehaviour {
             }
         }
 		if (P1 && P2 && !next) {
-			ayr.gameObject.SetActive (true);
-			if (Input.GetButtonDown("Submit")) {
+            if(!animed) {
+                animed = true;
+                ayr.gameObject.SetActive(true);
+                for(int i = 0; i < hideobj.Length; i++) {
+                    hideobj[i].SetActive(false);
+                }
+                anim1.Play();
+                anim2.Play();
+            }
+            if (Input.GetButtonDown("Submit")) {
 				next = true;
 				anim.Play ();
 				audios.PlayOneShot (audios.clip);

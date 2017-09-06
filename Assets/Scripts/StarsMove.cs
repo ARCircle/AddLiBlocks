@@ -5,6 +5,7 @@ using UnityEngine;
 public class StarsMove : MonoBehaviour {
     public Sprite[] image = new Sprite[4];
     public GameObject star;
+    public int starcolor = 0;
     public bool copyed = false;
 
 	// Use this for initialization
@@ -17,6 +18,7 @@ public class StarsMove : MonoBehaviour {
                 stars.transform.SetParent(this.transform.parent);
                 stars.transform.localPosition = new Vector3(i * 0.5f - 4f, i * 0.5f - 4f);
                 stars.transform.localScale = Vector3.one;
+                stars.GetComponent<StarsMove>().starcolor = i;
             }
         }
 	}
@@ -30,13 +32,13 @@ public class StarsMove : MonoBehaviour {
             }
         } else {
             copyed = true;
-            int nowY = Mathf.RoundToInt(transform.position.y * 2) + 1000;
+            //int nowY = Mathf.RoundToInt(transform.position.y * 2) + 1000;
             for(int i = 0; i < 15; i++) {
                 GameObject tmp = Instantiate<GameObject>(star);
                 SpriteRenderer sp = tmp.GetComponent<SpriteRenderer>();
                 sp.enabled = true;
                 //Debug.Log("num:" + nowY % 4);
-                sp.sprite = image[nowY % 4];
+                sp.sprite = image[starcolor % 4];
                 tmp.transform.SetParent(this.transform);
                 tmp.transform.localPosition = new Vector3(i - 7f, 0f);
                 tmp.transform.localScale = Vector3.one * 0.2f;

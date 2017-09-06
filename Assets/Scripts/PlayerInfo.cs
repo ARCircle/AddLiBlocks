@@ -92,7 +92,7 @@ public class PlayerInfo{
 					//break;
 				}
 			}
-			if (complete <= 1) {
+			if (complete <= 2) {
 				c_row [compcnt] = i;
 				compcnt++;
 			}
@@ -134,7 +134,9 @@ public class PlayerInfo{
 	}
 
 	public void UpStack(int upnum){    // 相手からの攻撃
-		int space1 = 0, space2 = 0;
+        int[] space = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int lim = 0, pos = 0;
+        string sp = "";
 		for(int h = 0; h < upnum; h++){
 			myself.UpRow ();
 			for (int i = 20; i > 0; i--) {
@@ -142,15 +144,23 @@ public class PlayerInfo{
 					BlockSlide (j, i, 1);
 				}
 			}
-			space1 = Random.Range (0, 10);
-			space2 = (space1 + Random.Range (1, 10)) % 10 + 1;
-			space1 += 1;
+            for (int i = 0; i < 3; i++) {
+                lim = Random.Range(0, 10 - i);
+                pos = lim;
+                for (int j = 0; j <= pos; j++) {
+                    if(space[j] != 0)
+                        pos = (pos + 1) % 10;
+                }
+                space[pos] = 1;
+            }
 			for (int j = 1; j <= 10; j++){
-				if (j != space1 && j != space2) {
+                sp += space[j - 1];
+				if (space[j - 1] == 0) {
 					stage [j, 1] = 1;
-					blocks_stack [j, 1] = myself.MakeBlock (j, 1, Color.gray, stackobj);
+                    blocks_stack [j, 1] = myself.MakeBlock (j, 1, Color.gray, stackobj);
 				} else {
-					stage [j, 1] = 0;
+                    space[j - 1] = 0;
+                    stage [j, 1] = 0;
 					if (blocks_stack [j, 1] != null) {
 						blocks_stack [j, 1].GetComponent<BlockScript> ().Suicide ();
 						blocks_stack [j, 1] = null;
@@ -158,6 +168,7 @@ public class PlayerInfo{
 				}
 			}
 		}
+        Debug.Log(sp);
 	}
 
 	void BlockSlide(int jj, int ii, int upslide){   // たまっているブロックを任意の段数だけ上下移動 移動先を指定

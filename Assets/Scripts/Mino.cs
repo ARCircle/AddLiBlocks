@@ -80,7 +80,7 @@ public class Mino : MonoBehaviour {
 				if (CheckEnable ())    // 実際にブロック移動
 					PutBoxes (false);
 			}
-
+            //Debug.Log(pnum + ":" + timer);
 			bool updownpush = Input.GetButtonDown (pstring + "Down");
 			float updown = Input.GetAxis (pstring + "Down");
 			if (updown > 0.1f) {    // ミノの高速落下
@@ -123,7 +123,7 @@ public class Mino : MonoBehaviour {
 		now_x = 5; now_y = 23;
 		next_x = 5; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
-		agaki = false; agalim = 10;
+		agaki = false; agalim = 3;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
 			box [i] = MakeBlock (now_x, now_y, World.coler[minonum], useobj.transform);
 			if (i == 4)
@@ -142,7 +142,8 @@ public class Mino : MonoBehaviour {
 			now_y += 1;
 		if(next_y < 23)
 			next_y += 1;
-	}
+        PutBoxes(false);
+    }
 
 	public GameObject MakeBlock(int xx, int yy, Color col, Transform parentobj){   // ブロック作成
 		GameObject tmp = Instantiate<GameObject> (boxbase);

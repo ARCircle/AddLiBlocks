@@ -20,14 +20,14 @@ public class CheckRow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        int cnt = 0, result = 9;
+        int cnt = 0, result = 8;
         for(int i = 1; i <= 10; i++)
             if(World.Plr[pnum].stage[i, rownum] > 0)
                 cnt++;
-        if(cnt > 9)
+        if(cnt > 8)
             result = 0;
         else
-            result = 9 - cnt;
+            result = 8 - cnt;
         if(countnum != result) {
             countnum = result;
             txt.text = "" + countnum;

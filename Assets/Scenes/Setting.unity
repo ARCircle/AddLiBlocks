@@ -1769,7 +1769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 250}
   m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &80863613
@@ -3218,6 +3218,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 129817357}
+  - component: {fileID: 129817358}
   m_Layer: 0
   m_Name: P2SelectedDisplay
   m_TagString: Untagged
@@ -3233,7 +3234,7 @@ Transform:
   m_GameObject: {fileID: 129817356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 300, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000228, y: 1.0000228, z: 1.0000228}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1994719579}
   - {fileID: 1930700262}
@@ -3245,6 +3246,21 @@ Transform:
   m_Father: {fileID: 132696178}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &129817358
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129817356}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6c701c5e30b95d440a1bc8d66352a1a2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6c701c5e30b95d440a1bc8d66352a1a2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &132696174
 GameObject:
   m_ObjectHideFlags: 0
@@ -10748,6 +10764,11 @@ MonoBehaviour:
   P1: 0
   P2: 0
   SceneMoveEffect: {fileID: 887505281}
+  hideobj:
+  - {fileID: 310245611}
+  - {fileID: 1174173774}
+  - {fileID: 148275086}
+  - {fileID: 1984421245}
   ayr: {fileID: 0}
 --- !u!4 &339006023
 Transform:
@@ -42612,6 +42633,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1601565093}
+  - component: {fileID: 1601565094}
   m_Layer: 0
   m_Name: P1SelectedDisplay
   m_TagString: Untagged
@@ -42639,6 +42661,21 @@ Transform:
   m_Father: {fileID: 132696178}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1601565094
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1601565092}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 2d75d759060b70c40a60adae797c5d22, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2d75d759060b70c40a60adae797c5d22, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1603925829
 GameObject:
   m_ObjectHideFlags: 0
@@ -52166,6 +52203,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9c76919b3a7273d48b8e9119f1d2309b, type: 3}
   - {fileID: 21300000, guid: e79fff605fa45284bb426c2878557b1d, type: 3}
   star: {fileID: 1018516670}
+  starcolor: 0
   copyed: 0
 --- !u!1 &1958104791
 GameObject:
