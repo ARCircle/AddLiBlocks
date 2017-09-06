@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour {
 	GameObject[,] nextplace = new GameObject[2, 3];
 	GameObject[,,] npblocks = new GameObject[2, 3, 5];
 	AudioSource erase_weak, erase_strong;
-	bool DirectStart = true;
-	public GameObject laser;
+	bool DirectStart = false;
+    public GameObject laser;
+    public Transform[] p_frame;
 	float starttimer = 3f, downrowtimer = -1f;
 
 	// Use this for initialization
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour {
 		string[] pname = new string[]{"1P_", "2P_"};
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 3; j++) {
-				nextplace [i, j] = guide.Find (pname [i] + j).gameObject;
+				nextplace [i, j] = guide.Find(pname[i] + "Next").Find (pname [i] + j).gameObject;
 				for (int k = 0; k < 5; k++) {
 					npblocks [i, j, k] = Instantiate<GameObject> (blockprefab);
 					npblocks [i, j, k].GetComponent<MeshRenderer> ().enabled = true;
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        World.speed += Time.deltaTime / 60f;
 		if (World.gameover < 0) {
 			if (starttimer < 0f) {
 				Vector2[] attack = new Vector2[2] {    //attack[].x ...揃ったライン数
@@ -171,8 +173,8 @@ public class GameManager : MonoBehaviour {
             }*/
             GameObject tmp1 = Instantiate<GameObject>(laser);
             GameObject tmp2 = Instantiate<GameObject>(laser);
-            tmp1.transform.position = new Vector3(-11.5f + 23f * p, select_y - 11f, -1f);
-            tmp2.transform.position = new Vector3(-11.5f + 23f * p, select_y - 11f, -1f);
+            tmp1.transform.position = new Vector3(p_frame[p].position.x + 5.5f, select_y + p_frame[p].position.y, -1f);
+            tmp2.transform.position = new Vector3(p_frame[p].position.x + 5.5f, select_y + p_frame[p].position.y, -1f);
             tmp1.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             tmp2.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
             if(select_y == World.Plr[p].B5row) {//attack [i].y > 0) {

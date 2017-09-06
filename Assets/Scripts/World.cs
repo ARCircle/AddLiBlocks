@@ -5,6 +5,7 @@ using UnityEngine;
 public static class World {	
 	public static PlayerInfo[] Plr = new PlayerInfo[2];
 	public static int gameover = -1;
+    public static float speed = 1f;
 
 	public static Color[] coler = new Color[]{
 		Color.cyan,
@@ -21,6 +22,7 @@ public static class World {
 		Plr [0] = new PlayerInfo ();
 		Plr [1] = new PlayerInfo ();
 		gameover = -1;
+        speed = 1f;
 	}
 
 	public static void SettingMino(int playernum, int minonum, int[,] cells){  //ミノの配置代入

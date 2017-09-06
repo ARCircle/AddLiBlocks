@@ -13,8 +13,8 @@ public class Mino : MonoBehaviour {
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
 	int nowrot = 0, nextrot = 0; //0, 1, 2, 3
-	bool agaki = false; int agalim = 5;
-	float timer = 0f, clock = 0.5f, accel = 10f;
+	bool agaki = false; int agalim = 3;
+	float timer = 0f, clock = 1f, accel = 10f;
 
 	AudioSource turn, landing;
 	GameObject boxbase;
@@ -84,15 +84,15 @@ public class Mino : MonoBehaviour {
 			bool updownpush = Input.GetButtonDown (pstring + "Down");
 			float updown = Input.GetAxis (pstring + "Down");
 			if (updown > 0.1f) {    // ミノの高速落下
-				if (timer < clock * (1f - 1f / accel)) {
-					timer += clock * (1f - 1f / accel);				
-				}
+				if (timer < clock * (1f - 1f / accel) / World.speed) {
+					timer += clock * (1f - 1f / accel) / World.speed;
+                }
 			}
-			if (timer > clock) {  // ミノの自動落下
+			if (timer > clock / World.speed) {  // ミノの自動落下
 				next_y -= 1;
 				if (!CheckEnable ()) {
 					if (agaki && agalim > 0) {
-						agalim -= 1;
+						agalim--;
 					} else {
 						PutBoxes (true);
 					}
