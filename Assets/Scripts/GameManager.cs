@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-	Transform guide;
-	GameObject blockprefab;
-	GameObject[,] nextplace = new GameObject[2, 3];
-	GameObject[,,] npblocks = new GameObject[2, 3, 5];
-	AudioSource erase_weak, erase_strong;
+	//Transform guide;
+	//GameObject blockprefab;
+	//GameObject[,] nextplace = new GameObject[2, 4];        // インデックス3番目はHoldの枠
+	//GameObject[,,] npblocks = new GameObject[2, 4, 5];
+    AudioSource erase_weak, erase_strong;
 	bool DirectStart = true;
     public GameObject laser;
     public Transform[] p_frame;
@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		guide = transform;//transform.parent.Find ("NextFrameGuide");
+		/*guide = transform;//transform.parent.Find ("NextFrameGuide");
 		//Debug.Log (guide);
 		blockprefab = guide.Find ("Block").gameObject;
 		string[] pname = new string[]{"1P_", "2P_"};
 		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 3; j++) {
+			for (int j = 0; j < 4; j++) {
 				nextplace [i, j] = guide.Find(pname[i] + "Next").Find (pname [i] + j).gameObject;
 				for (int k = 0; k < 5; k++) {
 					npblocks [i, j, k] = Instantiate<GameObject> (blockprefab);
@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour {
 					npblocks [i, j, k].transform.localScale = Vector3.one;
 				}
 			}
-		}
+		}*/
+
 		GameObject audioobj = GameObject.Find ("Audios");
 		erase_weak = audioobj.transform.Find ("shoukyo").GetComponent<AudioSource> ();
 		erase_strong = audioobj.transform.Find ("power_shoukyo").GetComponent<AudioSource> ();
@@ -90,8 +91,8 @@ public class GameManager : MonoBehaviour {
 		}
 		// < 本来必要ない部分 -終わり- >
 
-		SetNextMino (0);
-		SetNextMino (1);
+		//SetNextMino (0);
+		//SetNextMino (1);
 	}
 
 	// Update is called once per frame
@@ -132,7 +133,7 @@ public class GameManager : MonoBehaviour {
 								World.Plr [1 - i].UpStack (uprows);
 							}
 							// ミノの更新
-							SetNextMino (i);
+							//SetNextMino (i);
 						}
 					}
 				}
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void SetNextMino(int pnum) {
+	/*void SetNextMino(int pnum) {
 		for (int h = 0; h < 3; h++) {
 			int n = World.Plr [pnum].nextmino [h];
 			for (int i = 0; i < 5; i++) {
@@ -151,18 +152,18 @@ public class GameManager : MonoBehaviour {
 					if (m > 0) {
 						npblocks [pnum, h, m - 1].transform.localPosition = new Vector3 (j, i, 0);
 						npblocks [pnum, h, m - 1].GetComponent<Renderer> ().material.color = World.coler [n];
-						/*if (n == 7) {
-							for (int k = 0; k < 5; k++) {
-								npblocks [pnum, h, k].transform.localPosition = new Vector3 (j, i, k);
-								npblocks [pnum, h, k].GetComponent<Renderer> ().material.color = World.coler [n];
-							}
-						} else {*/
+						//if (n == 7) {
+						//	for (int k = 0; k < 5; k++) {
+						//		npblocks [pnum, h, k].transform.localPosition = new Vector3 (j, i, k);
+						//		npblocks [pnum, h, k].GetComponent<Renderer> ().material.color = World.coler [n];
+						//	}
+						//} else {
 						//}
 					}
 				}
 			}
 		}
-	}
+	}*/
 
     void CreateLaser(int p, int num) {
         for(int j = 0; j < num; j++) {

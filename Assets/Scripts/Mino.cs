@@ -19,28 +19,51 @@ public class Mino : MonoBehaviour {
 	AudioSource turn, landing;
 	GameObject boxbase;
 	GameObject useobj;
-	GameObject[] box = new GameObject[5];
+    GameObject guide;
+    GameObject blockprefab;
+    GameObject[] box = new GameObject[5];
+    GameObject[] nextplace = new GameObject[4];        // インデックス3番目はHoldの枠
+    GameObject[,] npblocks = new GameObject[4, 5];
 
-	void StartDelay () {    // 初期設定
-		if (pnum == 0) {
-			pstring = "1P_";
-		} else {
-			pstring = "2P_";
-		}
+
+    void StartDelay () {    // 初期設定
+		pstring = (pnum + 1) + "P_";
 		boxbase = transform.Find("Block").gameObject;
 		useobj = transform.Find("UseBlocks").gameObject;
 		World.Plr [pnum].stackobj = transform.Find("BlockStack");
 		World.Plr [pnum].myself = this;
-		GameObject audioobj = GameObject.Find ("Audios");
+
+        guide = GameObject.Find("NextFrameGuide");
+        blockprefab = guide.transform.Find("Block").gameObject;
+        for(int i = 0; i < 4; i++) {
+            nextplace[i] = guide.transform.Find(pstring + "Next").Find(pstring + i).gameObject;
+            for(int j = 0; j < 5; j++) {
+                npblocks[i, j] = Instantiate<GameObject>(blockprefab);
+                npblocks[i, j].GetComponent<MeshRenderer>().enabled = true;
+                npblocks[i, j].transform.SetParent(nextplace[i].transform);
+                npblocks[i, j].transform.localScale = Vector3.one;
+            }
+        }
+        SetNextMino();
+
+        GameObject audioobj = GameObject.Find ("Audios");
 		turn = audioobj.transform.Find ("kaiten").GetComponent<AudioSource> ();
 		landing = audioobj.transform.Find ("chakuchi").GetComponent<AudioSource> ();
 		doStartDelay = true;
 	}
 
 	void Update () {
-		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {	
-			
-			bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
+		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {
+
+
+            bool holdpush = Input.GetButtonDown(pstring + "Hold");
+            if(holdpush) {
+                World.Plr[pnum].InputHold();
+                SetHoldMino();
+                SetNextMino();
+            }
+
+            bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
 			float angle = Input.GetAxis (pstring + "RightRotate");
 			if (anglepush) {
 				agaki = true;
@@ -143,6 +166,54 @@ public class Mino : MonoBehaviour {
 		if(next_y < 23)
 			next_y += 1;
         PutBoxes(false);
+    }
+
+    public int GetBlocksNum(int row) {    // 列を指定するとその列に操作中のブロックがいくつ存在するかを返す
+        int cnt = 0, tmpy = row - now_y + 2;
+        if(0 <= tmpy && tmpy <= 4) {
+            for (int i = 0; i < 5; i++) {
+                if(nowcell[i, tmpy] > 0)
+                    cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    public void DeleteControlBlocks() {
+        for(int i = 0; i < 5; i++) {
+            box[i].GetComponent<BlockScript>().Suicide();
+            box[i] = null;
+        }
+    }
+
+    public void SetNextMino() {
+        for(int h = 0; h < 3; h++) {
+            int n = World.Plr[pnum].nextmino[h];
+            for(int i = 0; i < 5; i++) {
+                for(int j = 0; j < 5; j++) {
+                    int m = World.Plr[pnum].mino[n].cell[i, j];
+                    if(m > 0) {
+                        npblocks[h, m - 1].transform.localPosition = new Vector3(j, i, 0);
+                        npblocks[h, m - 1].GetComponent<Renderer>().material.color = World.coler[n];
+                    }
+                }
+            }
+        }
+    }
+
+    void SetHoldMino() {
+        int n = World.Plr[pnum].holdmino;
+        if(n < 0)
+            return;
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                int m = World.Plr[pnum].mino[n].cell[i, j];
+                if(m > 0) {
+                    npblocks[3, m - 1].transform.localPosition = new Vector3(j, i, 0);
+                    npblocks[3, m - 1].GetComponent<Renderer>().material.color = World.coler[n];
+                }
+            }
+        }
     }
 
 	public GameObject MakeBlock(int xx, int yy, Color col, Transform parentobj){   // ブロック作成

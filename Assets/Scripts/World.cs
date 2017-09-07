@@ -6,6 +6,7 @@ public static class World {
 	public static PlayerInfo[] Plr = new PlayerInfo[2];
 	public static int gameover = -1;
     public static float speed = 1f;
+    public static int completenum = 9;
 
 	public static Color[] coler = new Color[]{
 		Color.cyan,
@@ -28,14 +29,10 @@ public static class World {
 	public static void SettingMino(int playernum, int minonum, int[,] cells){  //ミノの配置代入
 		Plr [playernum - 1].mino [minonum].SetCell(cells);
 	}
-
-	public static void MinoReset(){
-
-	}
-
-	public static void GameReset(){
-		
-	}
+    
+    public static int OtherNum(int prenum, int maxnum) {    // 直前の数字以外の数値を出力するランダム
+        return (prenum + Random.Range(0, maxnum - 1)) % maxnum;
+    }
 
 	//[MenuItem ("Tools/Clear Console %#c")]
 	public static void ClearConsole() {
