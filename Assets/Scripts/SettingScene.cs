@@ -34,7 +34,7 @@ public class SettingScene : MonoBehaviour {
 
             do {
                 if(anglepush) {
-                    if(angle > 0.1f)
+                    if(angle > 0.1f && b.interactable)
                         b.GetComponent<SettingButtonScript>().Setting();
                 }
                 if(movepush) {

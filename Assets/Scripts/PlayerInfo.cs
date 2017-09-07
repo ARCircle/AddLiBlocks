@@ -41,7 +41,7 @@ public class PlayerInfo{
             if(i == 0)
                 nextmino[i] = Random.Range(0, MINONUM);
             else
-                nextmino[i] = World.OtherNum(nextmino[i], MINONUM);
+                nextmino[i] = World.OtherNum(nextmino[i - 1], MINONUM);
             //minib_cnt++;
         }
 	}

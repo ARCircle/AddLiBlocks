@@ -9,7 +9,7 @@ public class StarScript : MonoBehaviour {
 	}
 
 	void Update () {
-		transform.localPosition -= new Vector3 (0.01f, 0.01f, 0);
+		transform.localPosition -= new Vector3 (0.01f, 0.01f, 0) * 60f * Time.deltaTime;
 		if (transform.localPosition.y < -4) {
 			transform.localPosition = new Vector3 (4, 4, 0);
 		}

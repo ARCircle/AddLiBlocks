@@ -31,7 +31,9 @@ public static class World {
 	}
     
     public static int OtherNum(int prenum, int maxnum) {    // 直前の数字以外の数値を出力するランダム
-        return (prenum + Random.Range(0, maxnum - 1)) % maxnum;
+        int result = (prenum + Random.Range(0, maxnum - 1) + 1) % maxnum;
+        //Debug.Log(result);
+        return result;
     }
 
 	//[MenuItem ("Tools/Clear Console %#c")]

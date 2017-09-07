@@ -16,6 +16,7 @@ public class SettingSceneManager : MonoBehaviour {
 
 	AudioSource audios;
     Animation anim, anim1, anim2;
+    Animator anitor;
     // Use this for initialization
     void Start () {
 		P1 = false;
@@ -25,6 +26,7 @@ public class SettingSceneManager : MonoBehaviour {
 		anim = SceneMoveEffect.GetComponent<Animation> ();
         anim1 = GameObject.Find("P1SelectedDisplay").GetComponent<Animation>();
         anim2 = GameObject.Find("P2SelectedDisplay").GetComponent<Animation>();
+        anitor = GameObject.Find("PressEnter").GetComponent<Animator>();
         ayr.gameObject.SetActive (false);
 	}
 
@@ -48,6 +50,7 @@ public class SettingSceneManager : MonoBehaviour {
             }
             if (Input.GetButtonDown("Submit")) {
 				next = true;
+                anitor.SetTrigger("Submit");
 				anim.Play ();
 				audios.PlayOneShot (audios.clip);
 				//Application.LoadLevel ("Main");
