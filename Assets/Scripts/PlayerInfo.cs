@@ -6,7 +6,7 @@ public class PlayerInfo{
 	public const int MINONUM = 7, HEIGHT = 20, WIDTH = 10;//, MINIBLOCK = 10000;
 	public bool mino_controling = false, holdenable = true;
     public int holdmino = -1, nowmino = -1;
-    public int[] nextmino = new int[]{0, 0, 0};
+    public int[] nextmino = new int[]{0, 0, 0, 0, 0};
 	public int[,] stage = new int[WIDTH + 2, HEIGHT + 6];  // 値が0=空白, 9=壁, 1~4=通常ブロック, 5=追加ブロック
 	public GameObject[,] blocks_stack = new GameObject[WIDTH + 2, HEIGHT + 6];
     public MinoShape[] mino = new MinoShape[MINONUM];
@@ -37,7 +37,7 @@ public class PlayerInfo{
 		for (int i = 0; i < HEIGHT; i++){
 			c_row[i] = 0;
 		}
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 5; i++){
             if(i == 0)
                 nextmino[i] = Random.Range(0, MINONUM);
             else
@@ -54,8 +54,10 @@ public class PlayerInfo{
                 myself.Set(nextmino[0], 0);
                 nowmino = nextmino[0];
                 nextmino[0] = nextmino[1];
-                nextmino[1] = nextmino[2];
-                nextmino[2] = World.OtherNum(nextmino[1], MINONUM);
+				nextmino[1] = nextmino[2];
+				nextmino[2] = nextmino[3];
+				nextmino[3] = nextmino[4];
+                nextmino[4] = World.OtherNum(nextmino[3], MINONUM);
             } else {
                 int tmp = nowmino;
                 myself.Set(holdmino, 0);
@@ -91,10 +93,12 @@ public class PlayerInfo{
 					myself.AuraOff ();
 					DownStack ();
 					myself.Set (nextmino[0], 0);
-                    nowmino = nextmino[0];
-					nextmino [0] = nextmino [1];
-					nextmino [1] = nextmino [2];
-					nextmino [2] = World.OtherNum(nextmino[1], MINONUM);
+					nowmino = nextmino[0];
+					nextmino[0] = nextmino[1];
+					nextmino[1] = nextmino[2];
+					nextmino[2] = nextmino[3];
+					nextmino[3] = nextmino[4];
+					nextmino[4] = World.OtherNum(nextmino[3], MINONUM);
                     myself.SetNextMino();
 					//minib_cnt++;
 					//if (minib_cnt < MINIBLOCK) {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockScript : MonoBehaviour {
 	public bool aura = true;
-	int pnum = -2;
+	int pnum = -10;
 	float timer = 0f, dur = 0.7f, sign = 1f;
 	float deadtimer = 0f;
 	int deadlevel = 0;
@@ -35,6 +35,7 @@ public class BlockScript : MonoBehaviour {
 				float posy = transform.localPosition.y;
 				deadtimer = 0.9f / 20 * posy + 0.2f;
 				deadlevel++;
+				StopAura ();
 				break;
 			case 1:
 				deadtimer -= Time.deltaTime;

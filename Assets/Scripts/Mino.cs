@@ -14,7 +14,7 @@ public class Mino : MonoBehaviour {
 	int[,] nextcell = new int[5,5];
 	int nowrot = 0, nextrot = 0; //0, 1, 2, 3
 	bool agaki = false; int agalim = 3;
-	float timer = 0f, clock = 1f, accel = 10f;
+	float timer = 0f, clock = 1f, accel = 10f, yoko = -1f;
 
 	AudioSource turn, landing;
 	GameObject boxbase;
@@ -22,8 +22,8 @@ public class Mino : MonoBehaviour {
     GameObject guide;
     GameObject blockprefab;
     GameObject[] box = new GameObject[5];
-    GameObject[] nextplace = new GameObject[4];        // インデックス3番目はHoldの枠
-    GameObject[,] npblocks = new GameObject[4, 5];
+    GameObject[] nextplace = new GameObject[6];        // インデックス3番目はHoldの枠
+    GameObject[,] npblocks = new GameObject[6, 5];
 
 
     void StartDelay () {    // 初期設定
@@ -33,10 +33,10 @@ public class Mino : MonoBehaviour {
 		World.Plr [pnum].stackobj = transform.Find("BlockStack");
 		World.Plr [pnum].myself = this;
 
-        guide = GameObject.Find("NextFrameGuide");
+		guide = GameObject.Find (pstring + "Game").transform.Find ("NextFrameGuide").gameObject;
         blockprefab = guide.transform.Find("Block").gameObject;
-        for(int i = 0; i < 4; i++) {
-            nextplace[i] = guide.transform.Find(pstring + "Next").Find(pstring + i).gameObject;
+        for(int i = 0; i < 6; i++) {
+			nextplace[i] = guide.transform.Find(pstring + i).gameObject;
             for(int j = 0; j < 5; j++) {
                 npblocks[i, j] = Instantiate<GameObject>(blockprefab);
                 npblocks[i, j].GetComponent<MeshRenderer>().enabled = true;
@@ -53,8 +53,15 @@ public class Mino : MonoBehaviour {
 	}
 
 	void Update () {
+		if (doStartDelay && World.gameover < 0) {    // ゲームオーバー判定
+			for(int i = 21; i <= 25; i++){
+				for(int j = 1; j <= 10; j++){
+					if (World.Plr [pnum].stage [j, i] > 0)
+						World.gameover = pnum;
+				}
+			}
+		}
 		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {
-
 
             bool holdpush = Input.GetButtonDown(pstring + "Hold");
             if(holdpush) {
@@ -94,15 +101,26 @@ public class Mino : MonoBehaviour {
 
 			bool movepush = Input.GetButtonDown (pstring + "RightMove");
 			float move = Input.GetAxis (pstring + "RightMove");
+			float moveint = 0.04f;
 			if (movepush) {
-				agaki = true;
-				if (move > 0.1f)   // ミノの右移動
-					next_x += 1;
-				else if (move < -0.1f)   // ミノの左移動
-					next_x -= 1;
-				if (CheckEnable ())    // 実際にブロック移動
-					PutBoxes (false);
+				yoko = -1f;
+				moveint = 0.25f;
 			}
+			if (Mathf.Abs(move) > 0.1f) {
+				agaki = true;
+				if (yoko < 0f) {
+					yoko = moveint;
+					if (move > 0.1f)   // ミノの右移動
+						next_x += 1;
+					else if (move < -0.1f)   // ミノの左移動
+						next_x -= 1;
+					if (CheckEnable ())    // 実際にブロック移動
+						PutBoxes (false);
+				} else {
+					yoko -= Time.deltaTime;
+				}
+			}
+
             //Debug.Log(pnum + ":" + timer);
 			bool updownpush = Input.GetButtonDown (pstring + "Down");
 			float updown = Input.GetAxis (pstring + "Down");
@@ -148,9 +166,17 @@ public class Mino : MonoBehaviour {
 		nowrot = 0; nextrot = 0; timer = 0f;
 		agaki = false; agalim = 3;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
-			box [i] = MakeBlock (now_x, now_y, World.coler[minonum], useobj.transform);
-			if (i == 4)
-				box [i].GetComponent<BlockScript> ().aura = true;
+			for (int j = 0; j < 5; j++) {
+				int k = World.Plr [pnum].mino [minonum].cell [j, i];
+				if (k > 0) {
+					box [k - 1] = MakeBlock (now_x - 2 + i, now_y - 2 + j, World.coler[minonum], useobj.transform);
+					if (k == 5)
+						box [k - 1].GetComponent<BlockScript> ().aura = true;
+				}
+			}
+			//box [i] = MakeBlock (now_x, now_y, World.coler[minonum], useobj.transform);
+			//if (i == 4)
+			//	box [i].GetComponent<BlockScript> ().aura = true;
 		}
 		basecell = World.Plr[pnum].mino[minonum].cell;
 		Rotating (rotnum);
@@ -187,7 +213,7 @@ public class Mino : MonoBehaviour {
     }
 
     public void SetNextMino() {
-        for(int h = 0; h < 3; h++) {
+        for(int h = 0; h < 5; h++) {
             int n = World.Plr[pnum].nextmino[h];
             for(int i = 0; i < 5; i++) {
                 for(int j = 0; j < 5; j++) {
@@ -209,8 +235,8 @@ public class Mino : MonoBehaviour {
             for(int j = 0; j < 5; j++) {
                 int m = World.Plr[pnum].mino[n].cell[i, j];
                 if(m > 0) {
-                    npblocks[3, m - 1].transform.localPosition = new Vector3(j, i, 0);
-                    npblocks[3, m - 1].GetComponent<Renderer>().material.color = World.coler[n];
+                    npblocks[5, m - 1].transform.localPosition = new Vector3(j, i, 0);
+                    npblocks[5, m - 1].GetComponent<Renderer>().material.color = World.coler[n];
                 }
             }
         }
@@ -235,14 +261,14 @@ public class Mino : MonoBehaviour {
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
-		int tmpx = now_x - 2, tmpy = now_y - 2, max_y = 99;
+		int tmpx = now_x - 2, tmpy = now_y - 2, max_y = 0;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nowcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
 					//Debug.Log ("" + nowcell [j, i] + " : j=" + j + ", i=" + i);
 					if (isFinal) {
 						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
-                        if(max_y > i + tmpy)
+                        if(max_y < i + tmpy)
                             max_y = i + tmpy;
                         //Debug.Log ((j + tmpx) + "," + (i + tmpy));
                     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	//GameObject[,] nextplace = new GameObject[2, 4];        // インデックス3番目はHoldの枠
 	//GameObject[,,] npblocks = new GameObject[2, 4, 5];
     AudioSource erase_weak, erase_strong;
-	bool DirectStart = false;
+	bool DirectStart = true;
     public GameObject laser;
     public Transform[] p_frame;
 	float starttimer = 3f, downrowtimer = -1f;
