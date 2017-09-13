@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-	//Transform guide;
-	//GameObject blockprefab;
-	//GameObject[,] nextplace = new GameObject[2, 4];        // インデックス3番目はHoldの枠
-	//GameObject[,,] npblocks = new GameObject[2, 4, 5];
+    //Transform guide;
+    //GameObject blockprefab;
+    //GameObject[,] nextplace = new GameObject[2, 4];        // インデックス3番目はHoldの枠
+    //GameObject[,,] npblocks = new GameObject[2, 4, 5];
     AudioSource erase_weak, erase_strong;
-	bool DirectStart = true;
+    bool DirectStart = false;
     public GameObject laser;
     public Transform[] p_frame;
-	float starttimer = 3f, downrowtimer = -1f;
+    float starttimer = 3f;
 
-	// Use this for initialization
-	void Start () {
-		/*guide = transform;//transform.parent.Find ("NextFrameGuide");
+    // Use this for initialization
+    void Start() {
+        /*guide = transform;//transform.parent.Find ("NextFrameGuide");
 		//Debug.Log (guide);
 		blockprefab = guide.Find ("Block").gameObject;
 		string[] pname = new string[]{"1P_", "2P_"};
@@ -31,119 +31,104 @@ public class GameManager : MonoBehaviour {
 			}
 		}*/
 
-		GameObject audioobj = GameObject.Find ("Audios");
-		erase_weak = audioobj.transform.Find ("shoukyo").GetComponent<AudioSource> ();
-		erase_strong = audioobj.transform.Find ("power_shoukyo").GetComponent<AudioSource> ();
+        GameObject audioobj = GameObject.Find("Audios");
+        erase_weak = audioobj.transform.Find("shoukyo").GetComponent<AudioSource>();
+        erase_strong = audioobj.transform.Find("power_shoukyo").GetComponent<AudioSource>();
 
-		if (DirectStart) {
-			// < 本来必要ない部分 -始め- >
-			World.setPlayerInfo ();
-			World.Plr [0].mino [0].SetCell (new int[,] {
-				{ 0, 0, 1, 0, 0 },
-				{ 0, 0, 2, 0, 0 },
-				{ 0, 0, 3, 0, 0 },
-				{ 0, 0, 4, 0, 0 },
-				{ 0, 0, 5, 0, 0 }
-			});
-			World.Plr [0].mino [1].SetCell (new int[,] {
-				{ 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0 },
-				{ 0, 4, 2, 5, 0 },
-				{ 0, 0, 3, 0, 0 },
-				{ 0, 0, 0, 0, 0 }
-			});
-			World.Plr [0].mino [2].SetCell (new int[,] {
-				{ 0, 0, 0, 0, 0 },
-				{ 0, 1, 0, 0, 0 },
-				{ 0, 2, 0, 0, 0 },
-				{ 0, 3, 4, 5, 0 },
-				{ 0, 0, 0, 0, 0 }
-			});
-			World.Plr [0].mino [3].SetCell (new int[,] {
-				{ 0, 0, 1, 0, 0 },
-				{ 0, 0, 2, 0, 0 },
-				{ 0, 0, 3, 0, 0 },
-				{ 0, 5, 4, 0, 0 },
-				{ 0, 0, 0, 0, 0 }
-			});
-			World.Plr [0].mino [4].SetCell (new int[,] {
-				{ 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 3, 0 },
-				{ 0, 0, 2, 4, 0 },
-				{ 0, 0, 0, 5, 0 },
-				{ 0, 0, 0, 0, 0 }
-			});
-			World.Plr [0].mino [5].SetCell (new int[,] {
-				{ 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0 },
-				{ 0, 0, 2, 3, 0 },
-				{ 0, 0, 0, 4, 0 },
-				{ 0, 0, 0, 5, 0 }
-			});
-			World.Plr [0].mino [6].SetCell (new int[,] {
-				{ 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0 },
-				{ 0, 3, 2, 0, 0 },
-				{ 5, 4, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0 }
-			});
-			World.Plr [1].mino = World.Plr [0].mino;
-		}
-		// < 本来必要ない部分 -終わり- >
+        if(DirectStart) {
+            // < 本来必要ない部分 -始め- >
+            World.setPlayerInfo();
+            World.Plr[0].mino[0].SetCell(new int[,] {
+                { 0, 0, 1, 0, 0 },
+                { 0, 0, 2, 0, 0 },
+                { 0, 0, 3, 0, 0 },
+                { 0, 0, 4, 0, 0 },
+                { 0, 0, 5, 0, 0 }
+            });
+            World.Plr[0].mino[1].SetCell(new int[,] {
+                { 0, 0, 0, 0, 0 },
+                { 0, 0, 1, 0, 0 },
+                { 0, 4, 2, 5, 0 },
+                { 0, 0, 3, 0, 0 },
+                { 0, 0, 0, 0, 0 }
+            });
+            World.Plr[0].mino[2].SetCell(new int[,] {
+                { 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0 },
+                { 0, 2, 0, 0, 0 },
+                { 0, 3, 4, 5, 0 },
+                { 0, 0, 0, 0, 0 }
+            });
+            World.Plr[0].mino[3].SetCell(new int[,] {
+                { 0, 0, 1, 0, 0 },
+                { 0, 0, 2, 0, 0 },
+                { 0, 0, 3, 0, 0 },
+                { 0, 5, 4, 0, 0 },
+                { 0, 0, 0, 0, 0 }
+            });
+            World.Plr[0].mino[4].SetCell(new int[,] {
+                { 0, 0, 0, 0, 0 },
+                { 0, 0, 1, 3, 0 },
+                { 0, 0, 2, 4, 0 },
+                { 0, 0, 0, 5, 0 },
+                { 0, 0, 0, 0, 0 }
+            });
+            World.Plr[0].mino[5].SetCell(new int[,] {
+                { 0, 0, 0, 0, 0 },
+                { 0, 0, 1, 0, 0 },
+                { 0, 0, 2, 3, 0 },
+                { 0, 0, 0, 4, 0 },
+                { 0, 0, 0, 5, 0 }
+            });
+            World.Plr[0].mino[6].SetCell(new int[,] {
+                { 0, 0, 0, 0, 0 },
+                { 0, 0, 1, 0, 0 },
+                { 0, 3, 2, 0, 0 },
+                { 5, 4, 0, 0, 0 },
+                { 0, 0, 0, 0, 0 }
+            });
+            World.Plr[1].mino = World.Plr[0].mino;
+        }
+        // < 本来必要ない部分 -終わり- >
 
-		//SetNextMino (0);
-		//SetNextMino (1);
-	}
+        //SetNextMino (0);
+        //SetNextMino (1);
+    }
 
-	// Update is called once per frame
-	void Update () {
-        World.speed += Time.deltaTime / 60f;
-		if (World.gameover < 0) {
-			if (starttimer < 0f) {
-				Vector2[] attack = new Vector2[2] {    //attack[].x ...揃ったライン数
+    // Update is called once per frame
+    void Update() {
+        World.speed += Time.deltaTime / 120f;
+        if(World.gameover < 0 && starttimer < 0f) {
+            //Vector2 attack = Vector2.zero;
+            /*Vector2[] attack = new Vector2[2] {    //attack[].x ...揃ったライン数
 					World.Plr [0].Judge (),           //attack[].y ...0 = 判定期間外  -1 = 判定期間内
 					World.Plr [1].Judge ()            //              1 = 判定期間内 & 追加ブロックを使用している
-				};
-				for (int i = 0; i < 2; i++) {
-					if (attack [i].y != 0) {
-						int pow = (int)attack [i].x;
-						if (World.Plr [i].effect) {
-							if (downrowtimer < 0f) {
-                                CreateLaser(i, pow);
-								downrowtimer = 100.15f;
-							} else {
-								downrowtimer -= Time.deltaTime;
-								if (downrowtimer < 100f) {
-									World.Plr [i].effect = false;
-									downrowtimer = -1f;
-								}
-							}
-						} else {
-							// 列の上昇
-							int uprows = 0;
-							if (pow > 0) {
-								if (pow <= 3) {
-									uprows = pow - 1;
-								} else {
-									uprows = pow;
-								}
-								if (attack [i].y > 0f) {
-									uprows += 1;
-								}
-								World.Plr [1 - i].UpStack (uprows);
-							}
-							// ミノの更新
-							//SetNextMino (i);
-						}
-					}
-				}
-			} else {
-				starttimer -= Time.deltaTime;
-			}
-		}
-	}
+				};*/
+            for(int i = 0; i < 2; i++) {
+                World.Plr[i].Judge();
+                int pow = World.Plr[i].compnum;
+                bool moreup = World.Plr[i].powerup;
+                if(World.Plr[i].effect) {
+                    if(World.Plr[i].effecttimer <= 0f) {
+                        World.Plr[i].effecttimer = 0.4f;
+                        CreateLaser(i, pow);
+                    } else {
+                        World.Plr[i].effecttimer -= Time.deltaTime;
+                        if(World.Plr[i].effecttimer <= 0f) {
+                            World.Plr[i].Next();
+                            UpRow(i, pow, moreup);
+                        }
+                    }
+                } else if(!World.Plr[i].mino_controling) {
+                    World.Plr[i].Next();
+                }
+            }
+        } else {
+            starttimer -= Time.deltaTime;
+        }
+    }
 
-	/*void SetNextMino(int pnum) {
+    /*void SetNextMino(int pnum) {
 		for (int h = 0; h < 3; h++) {
 			int n = World.Plr [pnum].nextmino [h];
 			for (int i = 0; i < 5; i++) {
@@ -164,6 +149,20 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}*/
+    void UpRow(int p, int num, bool add) {
+        int uprows = 0;
+        if(num > 0) {
+            if(num <= 3) {
+                uprows = num - 1;
+            } else {
+                uprows = num;
+            }
+            if(add) {
+                uprows += 1;
+            }
+            World.Plr[1 - p].UpStack(uprows);
+        }
+    }
 
     void CreateLaser(int p, int num) {
         for(int j = 0; j < num; j++) {

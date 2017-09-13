@@ -15,12 +15,13 @@ public class PlayerInfo{
     //int minib_cnt = 0;
 
     // そろったとき専用の変数
-    //GameObject target;
-    public bool effect = false;
-	public int B5row = 0;
+    //GameObject target;    
+	public int compnum = 0, B5row = 0;
 	public int[] c_row = new int[HEIGHT];
+    public bool powerup = false, effect = false;
+    public float effecttimer = 0f;
 
-	public PlayerInfo(){    // 最初の定義
+    public PlayerInfo(){    // 最初の定義
 		for (int i = 0; i <= HEIGHT + 5; i++) {
 			for (int j = 0; j < WIDTH + 2; j++) {
 				if (i==0 || j==0 || j==WIDTH+1){
@@ -46,7 +47,7 @@ public class PlayerInfo{
         }
 	}
 
-    public void InputHold() {
+    public bool InputHold() {
         if(mino_controling && holdenable) {
             myself.DeleteControlBlocks();
             if(holdmino < 0) {
@@ -65,6 +66,9 @@ public class PlayerInfo{
                 holdmino = tmp;
                 holdenable = false;
             }
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -77,43 +81,32 @@ public class PlayerInfo{
 		}
 	}
 
-	public Vector2 Judge(){
-		Vector2 ans = new Vector2(0f, 0f);
-		if (myself != null) {
-			if (!mino_controling) {
-				ans.x = checkLine ();
-				if (UseB5 ()) {
-					ans.y = 1f;
-				} else {
-					ans.y = -1f;
-				}
-				if (!effect) {
-					B5row = 0;
-                    holdenable = true;
-					myself.AuraOff ();
-					DownStack ();
-					myself.Set (nextmino[0], 0);
-					nowmino = nextmino[0];
-					nextmino[0] = nextmino[1];
-					nextmino[1] = nextmino[2];
-					nextmino[2] = nextmino[3];
-					nextmino[3] = nextmino[4];
-					nextmino[4] = World.OtherNum(nextmino[3], MINONUM);
-                    myself.SetNextMino();
-					//minib_cnt++;
-					//if (minib_cnt < MINIBLOCK) {
-					//} else {
-					//	nextmino [2] = MINONUM - 1;
-					//	minib_cnt = 0;
-					//}
-				}
-			}
-		}
-		return ans;
+	public void Judge(){
+		if (myself != null && !mino_controling && !effect) {
+            checkLine();
+            UseB5();
+        }
 	}
 
-	public int checkLine(){  // そろっている行があるかチェック
-		int compcnt = 0;
+    public void Next() {
+        compnum = 0; B5row = 0;
+        powerup = false; effect = false; holdenable = true;
+        effecttimer = 0f;
+        myself.AuraOff();
+        DownStack();
+        if(World.gameover < 0) {
+            myself.Set(nextmino[0], 0);
+            nowmino = nextmino[0];
+            int i = 0;
+            for(; i < 4; i++) {
+                nextmino[i] = nextmino[i + 1];
+            }
+            nextmino[i] = World.OtherNum(nextmino[i - 1], MINONUM);
+            myself.SetNextMino();
+        }
+    }
+
+	public void checkLine(){  // そろっている行があるかチェック
 		int complete = 0;
 		for (int i = 1; i <= HEIGHT; i++) {
 			complete = 0;
@@ -124,29 +117,24 @@ public class PlayerInfo{
 				}
 			}
 			if (complete <= 10 - World.completenum) {
-				c_row [compcnt] = i;
-				compcnt++;
+				c_row [compnum] = i;
+				compnum++;
 			}
-		}
-		if (compcnt <= 0) {
-			effect = false;
-		}
-		return compcnt;
-	}
+        }
+        if(compnum > 0)
+            effect = true;
+    }
 
-	public bool UseB5(){    // 直前のミノの追加ブロックを利用して揃えたか
-		bool ans = false;
-		//Debug.Log ("B5row : " + B5row);
+	public void UseB5(){    // 直前のミノの追加ブロックを利用して揃えたか
+        powerup = false;
 		for (int i = 0; i < HEIGHT; i++) {
 			if (c_row [i] == 0) {
-				break;
+				return;
 			} else if (c_row [i] == B5row) {
-				ans = true;
-				//Debug.Log ("useB5");
-				break;
+				powerup = true;
+				return;
 			}
 		}
-		return ans;
 	}
 
 	public void DownStack(){    // たまっているブロックを下げる
@@ -161,8 +149,9 @@ public class PlayerInfo{
 				}
 				k++;
 			}
-		}
-	}
+        }
+        JudgeGameover();
+    }
 
 	public void UpStack(int upnum){    // 相手からの攻撃
         int[] space = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -170,7 +159,7 @@ public class PlayerInfo{
         //string sp = "";
 		for(int h = 0; h < upnum; h++){
 			myself.UpRow ();
-			for (int i = 20; i > 0; i--) {
+			for (int i = HEIGHT + 5; i > 0; i--) {
 				for (int j = 1; j <= 10; j++){
 					BlockSlide (j, i, 1);
 				}
@@ -199,14 +188,20 @@ public class PlayerInfo{
 				}
 			}
 		}
+        JudgeGameover();
         //Debug.Log(sp);
 	}
 
 	void BlockSlide(int jj, int ii, int upslide){   // たまっているブロックを任意の段数だけ上下移動 移動先を指定
-		if (ii < 1 || HEIGHT < ii || upslide == 0) {
+		if (upslide == 0) {
 			return;
-		}
-		else if (ii - upslide < 1 || HEIGHT + 5 < ii - upslide) {
+		} else if (ii < 1 || HEIGHT + 5 < ii) {
+            int tmpy = ii - upslide;
+            if(1 <= tmpy && tmpy <= HEIGHT + 5 && blocks_stack[jj, tmpy] != null) {
+                blocks_stack[jj, tmpy].GetComponent<BlockScript>().Suicide();
+                blocks_stack[jj, tmpy] = null;
+            }
+        } else if (ii - upslide < 1 || HEIGHT + 5 < ii - upslide) {
 			stage [jj, ii] = 0;
 			if (blocks_stack [jj, ii] != null) {
 				blocks_stack [jj, ii].GetComponent<BlockScript> ().Suicide ();
@@ -230,4 +225,17 @@ public class PlayerInfo{
 			}
 		}
 	}
+
+    void JudgeGameover() {
+        if(World.gameover < 0) {    // ゲームオーバー判定
+            for(int i = 21; i <= 25; i++) {
+                for(int j = 1; j <= 10; j++) {
+                    if(stage[j, i] > 0) {
+                        World.gameover = myself.pnum;
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }

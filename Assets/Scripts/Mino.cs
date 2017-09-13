@@ -13,10 +13,10 @@ public class Mino : MonoBehaviour {
 	int[,] nowcell = new int[5,5];
 	int[,] nextcell = new int[5,5];
 	int nowrot = 0, nextrot = 0; //0, 1, 2, 3
-	bool agaki = false; int agalim = 3;
+    bool agaki = false; float agalim = 3f;
 	float timer = 0f, clock = 1f, accel = 10f, yoko = -1f;
 
-	AudioSource turn, landing;
+	AudioSource turn, landing, holding;
 	GameObject boxbase;
 	GameObject useobj;
     GameObject guide;
@@ -49,25 +49,27 @@ public class Mino : MonoBehaviour {
         GameObject audioobj = GameObject.Find ("Audios");
 		turn = audioobj.transform.Find ("kaiten").GetComponent<AudioSource> ();
 		landing = audioobj.transform.Find ("chakuchi").GetComponent<AudioSource> ();
-		doStartDelay = true;
+        holding = audioobj.transform.Find("hold").GetComponent<AudioSource>();
+        doStartDelay = true;
 	}
 
 	void Update () {
-		if (doStartDelay && World.gameover < 0) {    // ゲームオーバー判定
+		/*if (doStartDelay && World.gameover < 0) {    // ゲームオーバー判定
 			for(int i = 21; i <= 25; i++){
 				for(int j = 1; j <= 10; j++){
 					if (World.Plr [pnum].stage [j, i] > 0)
 						World.gameover = pnum;
 				}
 			}
-		}
+		}*/
 		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {
 
             bool holdpush = Input.GetButtonDown(pstring + "Hold");
             if(holdpush) {
-                World.Plr[pnum].InputHold();
-                SetHoldMino();
-                SetNextMino();
+                if(World.Plr[pnum].InputHold()) {
+                    SetHoldMino();
+                    SetNextMino();
+                }
             }
 
             bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
@@ -132,17 +134,19 @@ public class Mino : MonoBehaviour {
 			if (timer > clock / World.speed) {  // ミノの自動落下
 				next_y -= 1;
 				if (!CheckEnable ()) {
-					if (agaki && agalim > 0) {
-						agalim--;
+					if (agaki && agalim >= 0f) {
+                        agalim -= 1f;
+						timer -= 1f;
 					} else {
 						PutBoxes (true);
-					}
+                        timer = 0f;
+                    }
 				} else {
 					PutBoxes (false);
-				}
+                    timer = 0f;
+                }
 				agaki = false;
-				timer = 0f;
-			}
+            }
 
 			if (updownpush) {
 				if (updown < -0.1f) {    // ミノの即着地
@@ -164,7 +168,7 @@ public class Mino : MonoBehaviour {
 		now_x = 5; now_y = 23;
 		next_x = 5; next_y = 23;
 		nowrot = 0; nextrot = 0; timer = 0f;
-		agaki = false; agalim = 3;
+		agaki = false; agalim = 3f;
 		for (int i = 0; i < 5; i++) {    // 実際に配置するブロックの生成
 			for (int j = 0; j < 5; j++) {
 				int k = World.Plr [pnum].mino [minonum].cell [j, i];
@@ -240,6 +244,7 @@ public class Mino : MonoBehaviour {
                 }
             }
         }
+        holding.PlayOneShot(holding.clip);
     }
 
 	public GameObject MakeBlock(int xx, int yy, Color col, Transform parentobj){   // ブロック作成
@@ -261,15 +266,15 @@ public class Mino : MonoBehaviour {
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
-		int tmpx = now_x - 2, tmpy = now_y - 2, max_y = 0;
+        int tmpx = now_x - 2, tmpy = now_y - 2;//, max_y = 0;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (nowcell [j, i] > 0 && InRangeCheck(j + tmpx, i + tmpy)) {
 					//Debug.Log ("" + nowcell [j, i] + " : j=" + j + ", i=" + i);
 					if (isFinal) {
 						World.Plr [pnum].InputStack(j + tmpx, i + tmpy, nowcell [j, i], box [nowcell [j, i] - 1]);
-                        if(max_y < i + tmpy)
-                            max_y = i + tmpy;
+                        //if(max_y < i + tmpy)
+                        //    max_y = i + tmpy;
                         //Debug.Log ((j + tmpx) + "," + (i + tmpy));
                     }
 					box [nowcell [j, i] - 1].transform.localPosition = new Vector3 (j + tmpx, i + tmpy, 0);
@@ -278,10 +283,10 @@ public class Mino : MonoBehaviour {
 		}
 		if (isFinal) {
 			World.Plr [pnum].mino_controling = false;
-			World.Plr [pnum].effect = true;
+			//World.Plr [pnum].effect = true;
 			landing.PlayOneShot (landing.clip);
-            if (max_y > 20)
-                World.gameover = pnum;
+            //if (max_y > 20)
+            //    World.gameover = pnum;
         }
 	}
 

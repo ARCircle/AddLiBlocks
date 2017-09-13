@@ -6,7 +6,8 @@ public class BlockScript : MonoBehaviour {
 	public bool aura = true;
 	int pnum = -10;
 	float timer = 0f, dur = 0.7f, sign = 1f;
-	float deadtimer = 0f;
+    float movespeed = 0f;
+    float deadtimer = 0f;
 	int deadlevel = 0;
 	SpriteRenderer colA, colB;
 	Renderer MyRend;
