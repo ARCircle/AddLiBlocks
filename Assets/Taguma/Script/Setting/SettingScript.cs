@@ -12,10 +12,10 @@ public class SettingScript : MonoBehaviour {
 	public SettingText st;
     public SettingSceneManager manager;
     SettingScene scene;
-    AudioSource enter;
+    AudioSource enter, back;
 	string xLine;
 	string yLine;
-    bool preset = true, setting = false;
+    bool preset = true, setting = false, cancel = false;
 
 	public GameObject obj1;
 	public GameObject obj2;
@@ -43,43 +43,47 @@ public class SettingScript : MonoBehaviour {
 	public GameObject obj24;
 	public GameObject obj25;
 
-	Button B1; Button B2; Button B3; Button B4; Button B5;
+    /*Button B1; Button B2; Button B3; Button B4; Button B5;
 	Button B6; Button B7; Button B8; Button B9; Button B10;
 	Button B11; Button B12; Button B13; Button B14; Button B15;
 	Button B16; Button B17; Button B18; Button B19; Button B20;
-	Button B21; Button B22; Button B23; Button B24; Button B25;
+	Button B21; Button B22; Button B23; Button B24; Button B25;*/
+    Button[] B = new Button[26];
+    GameObject disp;
 
 	// Use this for initialization
 	void Start () {
         enter = transform.parent.GetComponent<AudioSource>();
+        back = transform.parent.Find("ClickBlocker").GetComponent<AudioSource>();
+        disp = transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").gameObject;
         World.setPlayerInfo ();
         scene = this.GetComponent<SettingScene>();
 		st.Input ();
-		B1 = obj1.GetComponent<Button> ();
-		B2 = obj2.GetComponent<Button> ();
-		B3 = obj3.GetComponent<Button> ();
-		B4 = obj4.GetComponent<Button> ();
-		B5 = obj5.GetComponent<Button> ();
-		B6 = obj6.GetComponent<Button> ();
-		B7 = obj7.GetComponent<Button> ();
-		B8 = obj8.GetComponent<Button> ();
-		B9 = obj9.GetComponent<Button> ();
-		B10 = obj10.GetComponent<Button> ();
-		B11 = obj11.GetComponent<Button> ();
-		B12 = obj12.GetComponent<Button> ();
-		B13 = obj13.GetComponent<Button> ();
-		B14 = obj14.GetComponent<Button> ();
-		B15 = obj15.GetComponent<Button> ();
-		B16 = obj16.GetComponent<Button> ();
-		B17 = obj17.GetComponent<Button> ();
-		B18 = obj18.GetComponent<Button> ();
-		B19 = obj19.GetComponent<Button> ();
-		B20 = obj20.GetComponent<Button> ();
-		B21 = obj21.GetComponent<Button> ();
-		B22 = obj22.GetComponent<Button> ();
-		B23 = obj23.GetComponent<Button> ();
-		B24 = obj24.GetComponent<Button> ();
-		B25 = obj25.GetComponent<Button> ();
+		B[1] = obj1.GetComponent<Button> ();
+		B[2] = obj2.GetComponent<Button> ();
+		B[3] = obj3.GetComponent<Button> ();
+		B[4] = obj4.GetComponent<Button> ();
+		B[5] = obj5.GetComponent<Button> ();
+		B[6] = obj6.GetComponent<Button> ();
+		B[7] = obj7.GetComponent<Button> ();
+		B[8] = obj8.GetComponent<Button> ();
+		B[9] = obj9.GetComponent<Button> ();
+		B[10] = obj10.GetComponent<Button> ();
+		B[11] = obj11.GetComponent<Button> ();
+		B[12] = obj12.GetComponent<Button> ();
+		B[13] = obj13.GetComponent<Button> ();
+		B[14] = obj14.GetComponent<Button> ();
+		B[15] = obj15.GetComponent<Button> ();
+		B[16] = obj16.GetComponent<Button> ();
+		B[17] = obj17.GetComponent<Button> ();
+		B[18] = obj18.GetComponent<Button> ();
+		B[19] = obj19.GetComponent<Button> ();
+		B[20] = obj20.GetComponent<Button> ();
+		B[21] = obj21.GetComponent<Button> ();
+		B[22] = obj22.GetComponent<Button> ();
+		B[23] = obj23.GetComponent<Button> ();
+		B[24] = obj24.GetComponent<Button> ();
+		B[25] = obj25.GetComponent<Button> ();
 
         manager.P1 = false;
         manager.P2 = false;
@@ -91,43 +95,7 @@ public class SettingScript : MonoBehaviour {
 		case 0:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 2] = 1;
-                minocellsDefault[2, 2] = 2;
-                minocellsDefault[3, 2] = 3;
-                minocellsDefault[4, 2] = 4;
-                B8.interactable = false;
-                B13.interactable = false;
-                B18.interactable = false;
-                B23.interactable = false;
-                ColorManager.BtnStateColorChange(B8, Color.cyan, 3);
-                ColorManager.BtnStateColorChange(B13, Color.cyan, 3);
-                ColorManager.BtnStateColorChange(B18, Color.cyan, 3);
-                ColorManager.BtnStateColorChange(B23, Color.cyan, 3);
-
-                B1.interactable = false;
-                B2.interactable = false;
-                B4.interactable = false;
-                B5.interactable = false;
-                B6.interactable = false;
-                B10.interactable = false;
-                B11.interactable = false;
-                B15.interactable = false;
-                B16.interactable = false;
-                B20.interactable = false;
-                B21.interactable = false;
-                B25.interactable = false;
-                ColorManager.BtnStateColorChange(B1, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B2, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B4, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B5, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B6, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B10, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B11, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B15, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B16, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B20, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B21, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B25, Color.gray, 3);
+                MakePreset(8, 13, 18, 23, Color.cyan, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -137,54 +105,21 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 2] = 0;
-				minocellsDefault [2, 2] = 0;
-				minocellsDefault [3, 2] = 0;
-				minocellsDefault [4, 2] = 0;
-
-				B2.interactable = true;
-				B6.interactable = true;
-				B8.interactable = true;
-				B13.interactable = true;
-				B18.interactable = true;
-				B23.interactable = true;
-
-				B11.interactable = true;
-				B15.interactable = true;
 
                 preset = true;
                 setting = false;
 			}
+            if(cancel) {
+                cancel = false;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
+            }
 			break;
 		case 1:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 1] = 1;
-                minocellsDefault[2, 1] = 2;
-                minocellsDefault[2, 2] = 3;
-                minocellsDefault[2, 3] = 4;
-                B7.interactable = false;
-                B12.interactable = false;
-                B13.interactable = false;
-                B14.interactable = false;
-                ColorManager.BtnStateColorChange(B7, Color.blue, 3);
-                ColorManager.BtnStateColorChange(B12, Color.blue, 3);
-                ColorManager.BtnStateColorChange(B13, Color.blue, 3);
-                ColorManager.BtnStateColorChange(B14, Color.blue, 3);
-
-                B3.interactable = false;
-                B4.interactable = false;
-                B22.interactable = false;
-                B23.interactable = false;
-                B24.interactable = false;
-                ColorManager.BtnStateColorChange(B3, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B4, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B22, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B23, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B24, Color.gray, 3);
+                MakePreset(7, 12, 13, 14, Color.blue, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -194,48 +129,23 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 1] = 0;
-				minocellsDefault [2, 1] = 0;
-				minocellsDefault [2, 2] = 0;
-				minocellsDefault [2, 3] = 0;
-
-				B7.interactable = true;
-				B8.interactable = true;
-				B12.interactable = true;
-				B13.interactable = true;
-				B14.interactable = true;
-
-				B4.interactable = true;
-				B10.interactable = true;
 
                 preset = true;
                 setting = false;
+            }
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
             }
             break;
 		case 2:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 3] = 1;
-                minocellsDefault[2, 1] = 2;
-                minocellsDefault[2, 2] = 3;
-                minocellsDefault[2, 3] = 4;
-                B9.interactable = false;
-                B12.interactable = false;
-                B13.interactable = false;
-                B14.interactable = false;
-                ColorManager.BtnStateColorChange(B9, Color.magenta, 3);
-                ColorManager.BtnStateColorChange(B12, Color.magenta, 3);
-                ColorManager.BtnStateColorChange(B13, Color.magenta, 3);
-                ColorManager.BtnStateColorChange(B14, Color.magenta, 3);
-
-                B2.interactable = false;
-                B3.interactable = false;
-                B6.interactable = false;
-                ColorManager.BtnStateColorChange(B2, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B3, Color.gray, 3);
+                MakePreset(9, 12, 13, 14, Color.magenta, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -245,51 +155,23 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 3] = 0;
-				minocellsDefault [2, 1] = 0;
-				minocellsDefault [2, 2] = 0;
-				minocellsDefault [2, 3] = 0;
-
-				B9.interactable = true;
-				B12.interactable = true;
-				B13.interactable = true;
-				B14.interactable = true;
-
-				B2.interactable = true;
-				B3.interactable = true;
-				B6.interactable = true;
 
                 preset = true;
                 setting = false;
+            }
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
             }
             break;
 		case 3:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 1] = 1;
-                minocellsDefault[1, 2] = 2;
-                minocellsDefault[2, 1] = 3;
-                minocellsDefault[2, 2] = 4;
-                B7.interactable = false;
-                B8.interactable = false;
-                B12.interactable = false;
-                B13.interactable = false;
-                ColorManager.BtnStateColorChange(B7, Color.yellow, 3);
-                ColorManager.BtnStateColorChange(B8, Color.yellow, 3);
-                ColorManager.BtnStateColorChange(B12, Color.yellow, 3);
-                ColorManager.BtnStateColorChange(B13, Color.yellow, 3);
-
-                B4.interactable = false;
-                B10.interactable = false;
-                B15.interactable = false;
-                B19.interactable = false;
-                ColorManager.BtnStateColorChange(B4, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B10, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B15, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B19, Color.gray, 3);
+                MakePreset(7, 8, 12, 13, Color.yellow, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -299,49 +181,23 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 1] = 0;
-				minocellsDefault [1, 2] = 0;
-				minocellsDefault [2, 1] = 0;
-				minocellsDefault [2, 2] = 0;
-
-				B7.interactable = true;
-				B8.interactable = true;
-				B12.interactable = true;
-				B13.interactable = true;
-
-				B4.interactable = true;
-				B10.interactable = true;
-				B15.interactable = true;
 
                 preset = true;
                 setting = false;
+            }
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
             }
             break;
 		case 4:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 2] = 1;
-                minocellsDefault[1, 3] = 2;
-                minocellsDefault[2, 1] = 3;
-                minocellsDefault[2, 2] = 4;
-                B8.interactable = false;
-                B9.interactable = false;
-                B12.interactable = false;
-                B13.interactable = false;
-                ColorManager.BtnStateColorChange(B8, Color.green, 3);
-                ColorManager.BtnStateColorChange(B9, Color.green, 3);
-                ColorManager.BtnStateColorChange(B12, Color.green, 3);
-                ColorManager.BtnStateColorChange(B13, Color.green, 3);
-
-                B2.interactable = false;
-                B6.interactable = false;
-                B15.interactable = false;
-                ColorManager.BtnStateColorChange(B2, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B6, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B15, Color.gray, 3);
+                MakePreset(8, 9, 12, 13, Color.green, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -351,46 +207,23 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 2] = 0;
-				minocellsDefault [1, 3] = 0;
-				minocellsDefault [2, 1] = 0;
-				minocellsDefault [2, 2] = 0;
-
-				B8.interactable = true;
-				B9.interactable = true;
-				B12.interactable = true;
-				B13.interactable = true;
-
-				B15.interactable = true;
-				B19.interactable = true;
 
                 preset = true;
                 setting = false;
+            }
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
             }
             break;
 		case 5:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 2] = 1;
-                minocellsDefault[2, 1] = 2;
-                minocellsDefault[2, 2] = 3;
-                minocellsDefault[2, 3] = 4;
-                B8.interactable = false;
-                B12.interactable = false;
-                B13.interactable = false;
-                B14.interactable = false;
-                ColorManager.BtnStateColorChange(B8, Color.red, 3);
-                ColorManager.BtnStateColorChange(B12, Color.red, 3);
-                ColorManager.BtnStateColorChange(B13, Color.red, 3);
-                ColorManager.BtnStateColorChange(B14, Color.red, 3);
-
-                B4.interactable = false;
-                B10.interactable = false;
-                ColorManager.BtnStateColorChange(B4, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B10, Color.gray, 3);
+                MakePreset(8, 12, 13, 14, Color.red, false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -400,46 +233,23 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
-
-				minocellsDefault [1, 2] = 0;
-				minocellsDefault [2, 1] = 0;
-				minocellsDefault [2, 2] = 0;
-				minocellsDefault [2, 3] = 0;
-
-				B8.interactable = true;
-				B12.interactable = true;
-				B13.interactable = true;
-				B14.interactable = true;
-
-				B2.interactable = true;
-				B6.interactable = true;
 
                 preset = true;
                 setting = false;
             }
-			break;
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
+            }
+            break;
 		case 6:
             if(preset) {
                 preset = false;
-                minocellsDefault[1, 1] = 1;
-                minocellsDefault[1, 2] = 2;
-                minocellsDefault[2, 2] = 3;
-                minocellsDefault[2, 3] = 4;
-                B7.interactable = false;
-                B8.interactable = false;
-                B13.interactable = false;
-                B14.interactable = false;
-                ColorManager.BtnStateColorChange(B7, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B8, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B13, new Color(1f, 0.5f, 0f), 3);
-                ColorManager.BtnStateColorChange(B14, new Color(1f, 0.5f, 0f), 3);
-
-                B11.interactable = false;
-                B17.interactable = false;
-                ColorManager.BtnStateColorChange(B11, Color.gray, 3);
-                ColorManager.BtnStateColorChange(B17, Color.gray, 3);
+                MakePreset(7, 8, 13, 14, new Color(1f, 0.5f, 0f), false);
                 scene.SetFirstButton();
             }
 			if (setting) {
@@ -449,47 +259,10 @@ public class SettingScript : MonoBehaviour {
 					}
 				}
 				World.SettingMino (playernum, minonum, minocells);
-                transform.parent.Find("P" + (3 - playernum) + "SelectedDisplay").GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().SetColor(minocells);
                 minonum++;
 
-				minocellsDefault [1, 1] = 0;
-				minocellsDefault [1, 2] = 0;
-				minocellsDefault [2, 2] = 0;
-				minocellsDefault [2, 3] = 0;
-
-				B1.interactable = false;
-				B2.interactable = false;
-				B3.interactable = false;
-				B4.interactable = false;
-				B5.interactable = false;
-				B6.interactable = false;
-				B7.interactable = false;
-				B8.interactable = false;
-				B9.interactable = false;
-				B10.interactable = false;
-				B11.interactable = false;
-				B12.interactable = false;
-				B13.interactable = false;
-				B14.interactable = false;
-				B15.interactable = false;
-				B16.interactable = false;
-				B17.interactable = false;
-				B18.interactable = false;
-				B19.interactable = false;
-				B20.interactable = false;
-				B21.interactable = false;
-				B22.interactable = false;
-				B23.interactable = false;
-				B24.interactable = false;
-				B25.interactable = false;
-
-				ColorManager.BtnStateColorChange (B7, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B8, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B9, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B12, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B13, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B14, Color.gray, 3);
-				ColorManager.BtnStateColorChange (B18, Color.gray, 3);
+                MakePreset(0, 0, 0, 0, Color.black, true);
 
                 preset = true;
                 setting = false;
@@ -501,16 +274,66 @@ public class SettingScript : MonoBehaviour {
 					manager.P1 = true;
 				}
 				st.Wait ();
-			}
-			break;
+            }
+            if(cancel) {
+                preset = true;
+                cancel = false;
+                minonum--;
+                disp.transform.GetChild(minonum).GetComponent<DesideBlock>().AllGray();
+            }
+            break;
 		}
 	}
 
     public void PlayEnter() {
-        enter.PlayOneShot(enter.clip);
+    }
+
+    void MakePreset(int b1, int b2, int b3, int b4, Color col, bool final) {
+        for(int i = 0; i < 5; i++) {        // リセット
+            for(int j = 0; j < 5; j++) {
+                minocellsDefault[i, j] = 0;
+                B[5*i + j+1].interactable = false;
+                ColorManager.BtnStateColorChange(B[5*i + j+1], Color.gray, 3);
+            }
+        }
+        if(!final) {
+            trueIntera(b1, 1);
+            trueIntera(b2, 2);
+            trueIntera(b3, 3);
+            trueIntera(b4, 4);
+            B[b1].interactable = false;
+            B[b2].interactable = false;
+            B[b3].interactable = false;
+            B[b4].interactable = false;
+            ColorManager.BtnStateColorChange(B[b1], col, 3);
+            ColorManager.BtnStateColorChange(B[b2], col, 3);
+            ColorManager.BtnStateColorChange(B[b3], col, 3);
+            ColorManager.BtnStateColorChange(B[b4], col, 3);
+        }
+
+    }
+
+    void trueIntera(int num, int order) {
+        int i = (num - 1) / 5;
+        int j = (num - 1) % 5;
+        minocellsDefault[i, j] = order;
+        if(j - 1 >= 0)
+            B[5*i + j].interactable = true;
+        if(j + 1 < 5)
+            B[5*i + j+2].interactable = true;
+        if(i - 1 >= 0)
+            B[5*(i-1) + j+1].interactable = true;
+        if(i + 1 < 5)
+            B[5*(i+1) + j+1].interactable = true;
     }
 
     public void trueSetting() {
+        enter.PlayOneShot(enter.clip);
         setting = true;
+    }
+
+    public void trueCancel() {
+        back.PlayOneShot(back.clip);
+        cancel = true;
     }
 }

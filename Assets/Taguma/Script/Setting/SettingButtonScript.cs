@@ -24,4 +24,8 @@ public class SettingButtonScript : MonoBehaviour {
         script.PlayEnter();
 		//NextButton.playerButton.interactable = true;
 	}
+
+    public void Cancel() {
+        script.trueCancel();
+    }
 }

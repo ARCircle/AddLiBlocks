@@ -22,7 +22,7 @@ public class DesideBlock : MonoBehaviour {
 		
 	}
 
-    void AllGray() {
+    public void AllGray() {
         for(int i = 0; i < 25; i++) {
             row = i / 5;
             column = i % 5;
