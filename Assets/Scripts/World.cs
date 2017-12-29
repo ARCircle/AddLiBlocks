@@ -8,6 +8,9 @@ public static class World {
     public static float speed = 1f;
     public static int completenum = 9;
 
+	public static bool connection = false;
+	public static int connectnum = 0;
+
 	public static Color[] coler = new Color[]{
 		Color.cyan,
 		Color.blue,

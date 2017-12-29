@@ -18,6 +18,8 @@ public class StartScene : MonoBehaviour {
 
 		//最初に選択状態するボタン
 		Title.Select ();
+		PhotonNetwork.Disconnect ();
+		World.connection = false;
 	}
 	
 	// Update is called once per frame

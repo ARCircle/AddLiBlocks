@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerInfo{
 	public const int MINONUM = 7, HEIGHT = 20, WIDTH = 10;//, MINIBLOCK = 10000;
+
+	public bool rmov_down = false, rrot_down = false;
+	public bool hold_down = false, down_down = false;
+	public float rmov = 0f, rrot = 0f, hold = 0f, down = 0f;
+
 	public bool mino_controling = false, holdenable = true;
     public int holdmino = -1, nowmino = -1;
     public int[] nextmino = new int[]{0, 0, 0, 0, 0};

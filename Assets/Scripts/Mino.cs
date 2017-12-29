@@ -64,7 +64,8 @@ public class Mino : MonoBehaviour {
 		}*/
 		if (doStartDelay && World.Plr[pnum].mino_controling && World.gameover < 0) {
 
-            bool holdpush = Input.GetButtonDown(pstring + "Hold");
+			//bool holdpush = Input.GetButtonDown(pstring + "Hold");
+			bool holdpush = World.Plr[pnum].hold_down;
             if(holdpush) {
                 if(World.Plr[pnum].InputHold()) {
                     SetHoldMino();
@@ -72,10 +73,13 @@ public class Mino : MonoBehaviour {
                 }
             }
 
-            bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
-			float angle = Input.GetAxis (pstring + "RightRotate");
+            //bool anglepush = Input.GetButtonDown (pstring + "RightRotate");
+			//float angle = Input.GetAxis (pstring + "RightRotate");
+			bool anglepush = World.Plr[pnum].rrot_down;
+			float angle = World.Plr[pnum].rrot;
 			if (anglepush) {
 				agaki = true;
+				Debug.Log ("回転");
 				int[] mvx = new int[]{ 0, -1, 1, -2, 2 };
 				if (angle > 0.1f) {    // ミノの右回転
 					for (int i = 0; i < 5; i++){
@@ -101,8 +105,10 @@ public class Mino : MonoBehaviour {
 
 			}
 
-			bool movepush = Input.GetButtonDown (pstring + "RightMove");
-			float move = Input.GetAxis (pstring + "RightMove");
+			//bool movepush = Input.GetButtonDown (pstring + "RightMove");
+			//float move = Input.GetAxis (pstring + "RightMove");
+			bool movepush = World.Plr[pnum].rmov_down;
+			float move = World.Plr[pnum].rmov;
 			float moveint = 0.04f;
 			if (movepush) {
 				yoko = -1f;
@@ -124,8 +130,10 @@ public class Mino : MonoBehaviour {
 			}
 
             //Debug.Log(pnum + ":" + timer);
-			bool updownpush = Input.GetButtonDown (pstring + "Down");
-			float updown = Input.GetAxis (pstring + "Down");
+			//bool updownpush = Input.GetButtonDown (pstring + "Down");
+			//float updown = Input.GetAxis (pstring + "Down");
+			bool updownpush = World.Plr[pnum].down_down;
+			float updown = World.Plr[pnum].down;
 			if (updown > 0.1f) {    // ミノの高速落下
 				if (timer < clock * (1f - 1f / accel) / World.speed) {
 					timer += clock * (1f - 1f / accel) / World.speed;
@@ -266,6 +274,7 @@ public class Mino : MonoBehaviour {
 	}
 
 	void PutBoxes(bool isFinal){    // ブロック配置
+		Debug.Log("PutBoxes");
         int tmpx = now_x - 2, tmpy = now_y - 2;//, max_y = 0;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {

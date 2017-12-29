@@ -25,12 +25,19 @@ public class SettingScene : MonoBehaviour {
     void Update() {
         if(b != null) {
             int cnt = 0;
-            bool anglepush = Input.GetButtonDown(pstring + "RightRotate");
+            /*bool anglepush = Input.GetButtonDown(pstring + "RightRotate");
             float angle = Input.GetAxis(pstring + "RightRotate");
             bool movepush = Input.GetButtonDown(pstring + "RightMove");
             float move = Input.GetAxis(pstring + "RightMove");
             bool updownpush = Input.GetButtonDown(pstring + "Down");
-            float updown = Input.GetAxis(pstring + "Down");
+            float updown = Input.GetAxis(pstring + "Down");*/
+			bool anglepush = World.Plr [pnum - 1].rrot_down;
+			float angle = World.Plr [pnum - 1].rrot;
+			bool movepush = World.Plr [pnum - 1].rmov_down;
+			float move = World.Plr [pnum - 1].rmov;
+			bool updownpush = World.Plr [pnum - 1].down_down;
+			float updown = World.Plr [pnum - 1].down;
+			
 
             do {
                 if(anglepush) {
